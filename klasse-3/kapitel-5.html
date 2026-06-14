@@ -7,39 +7,51 @@
     <style>
         * { box-sizing: border-box; }
         html, body { min-height: 100%; }
-        body { margin: 0; background: #071f1a; color: #ffffff; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.03em; user-select: none; -webkit-user-select: none; }
-        .arena { min-height: 100vh; display: flex; flex-direction: column; padding: 12px; background: radial-gradient(circle at 50% 0%, rgba(100,240,111,0.18), rgba(7,31,26,0) 34%), linear-gradient(180deg, #144837 0%, #071f1a 62%); }
+        body { margin: 0; background: #0f241d; color: #f6f1e6; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.03em; user-select: none; -webkit-user-select: none; }
+        .arena { min-height: 100vh; display: flex; flex-direction: column; padding: 12px; background: radial-gradient(circle at 50% 0%, rgba(214,176,76,0.14), rgba(15,36,29,0) 34%), linear-gradient(180deg, #17382d 0%, #0f241d 62%); }
         .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; max-width: 540px; width: 100%; margin: 0 auto 10px auto; }
-        .nav-back { min-width: 78px; min-height: 44px; border: 1px solid #9de7a1; background: rgba(7,31,26,0.78); color: #e8ffeb; border-radius: 8px; font-size: 15px; font-weight: bold; }
-        .title { flex: 1; min-width: 0; text-align: center; color: #64f06f; font-size: 18px; font-weight: bold; text-transform: uppercase; }
-        .score { min-width: 78px; text-align: right; color: #ffffff; font-weight: bold; font-size: 15px; }
-        .progress-track { max-width: 540px; width: 100%; height: 13px; border-radius: 999px; overflow: hidden; margin: 0 auto 12px auto; background: #315a4d; border: 1px solid rgba(255,255,255,0.18); }
-        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #64f06f, #d7ff4f); }
-        .card { max-width: 540px; width: 100%; margin: 0 auto; background: #123b2f; border: 2px solid rgba(100,240,111,0.78); border-radius: 8px; padding: 15px; box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+        .nav-back { min-width: 78px; min-height: 44px; border: 1px solid #d6b04c; background: rgba(15,36,29,0.82); color: #f6f1e6; border-radius: 8px; font-size: 15px; font-weight: bold; }
+        .title { flex: 1; min-width: 0; text-align: center; color: #f6f1e6; font-size: 18px; font-weight: bold; text-transform: uppercase; }
+        .score { min-width: 78px; text-align: right; color: #f6f1e6; font-weight: bold; font-size: 15px; }
+        .progress-track { max-width: 540px; width: 100%; height: 13px; border-radius: 999px; overflow: hidden; margin: 0 auto 12px auto; background: #28473b; border: 1px solid rgba(246,241,230,0.18); }
+        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #d6b04c, #6fbf73); }
+        .card { max-width: 540px; width: 100%; margin: 0 auto; background: #17382d; border: 2px solid rgba(214,176,76,0.82); border-radius: 8px; padding: 15px; box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
         .mode-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-        .mode-icon { width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #071f1a; background: #d7ff4f; font-size: 27px; font-weight: bold; border: 3px solid #ffffff; flex: 0 0 auto; letter-spacing: 0; }
+        .mode-icon { width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0f241d; background: #d6b04c; font-size: 27px; font-weight: bold; border: 3px solid #f6f1e6; flex: 0 0 auto; letter-spacing: 0; }
         .mode-text { flex: 1; min-width: 0; }
-        .mode-label { color: #d7ff4f; font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; }
-        .hint { color: #e8ffeb; font-size: 16px; line-height: 1.35; }
+        .mode-label { color: #d6b04c; font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; }
+        .hint { color: #f6f1e6; font-size: 16px; line-height: 1.35; }
         .task { font-size: 22px; line-height: 1.3; font-weight: bold; margin: 10px 0 12px 0; }
-        .sentence { background: #071f1a; border: 2px dashed #64f06f; border-radius: 8px; min-height: 92px; padding: 14px; display: flex; align-items: center; justify-content: center; text-align: center; color: #ffffff; font-size: 29px; font-weight: bold; line-height: 1.25; margin-bottom: 12px; overflow-wrap: anywhere; }
-        .question-word { color: #d7ff4f; display: inline-block; margin-right: 0.22em; text-decoration: underline; text-decoration-thickness: 3px; }
+        .sentence { background: #0f241d; border: 2px dashed #d6b04c; border-radius: 8px; min-height: 92px; padding: 14px; display: flex; align-items: center; justify-content: center; text-align: center; color: #f6f1e6; font-size: 29px; font-weight: bold; line-height: 1.25; margin-bottom: 12px; overflow-wrap: anywhere; }
+        .question-word { color: #d6b04c; display: inline-block; margin-right: 0.22em; text-decoration: underline; text-decoration-thickness: 3px; }
+        .mark-comma, .mark-point, .mark-question, .mark-exclaim { display: inline-block; min-width: 0.82em; margin: 0 0.06em; border-radius: 6px; font-size: 1.18em; line-height: 1; text-align: center; }
+        .mark-comma { color: #0f241d; background: #d6b04c; padding: 0.03em 0.18em 0.14em 0.18em; }
+        .mark-point { color: #0f241d; background: #f6f1e6; padding: 0.03em 0.18em 0.1em 0.18em; }
+        .mark-question { color: #0f241d; background: #5fb7b0; padding: 0.03em 0.18em 0.1em 0.18em; }
+        .mark-exclaim { color: #0f241d; background: #c94c4c; padding: 0.03em 0.18em 0.1em 0.18em; }
         .options { display: grid; grid-template-columns: 1fr; gap: 10px; }
         .options.symbols { grid-template-columns: repeat(3, 1fr); }
-        .option { width: 100%; min-height: 60px; border: 2px solid rgba(255,255,255,0.24); border-radius: 8px; background: #1c5a45; color: #ffffff; padding: 12px; font-size: 22px; font-weight: bold; line-height: 1.18; text-align: center; }
+        .options.tiles { grid-template-columns: repeat(2, 1fr); }
+        .option { width: 100%; min-height: 60px; border: 2px solid rgba(246,241,230,0.24); border-radius: 8px; background: #225443; color: #f6f1e6; padding: 12px; font-size: 22px; font-weight: bold; line-height: 1.18; text-align: center; }
         .symbols .option { min-height: 76px; font-size: 38px; letter-spacing: 0; }
+        .tiles .option { min-height: 82px; font-size: 34px; background: #0f241d; border-color: #d6b04c; }
         .option:active { transform: scale(0.99); }
-        .option.correct { background: #d7ff4f; color: #071f1a; border-color: #ffffff; }
+        .option.correct { background: #6fbf73; color: #0f241d; border-color: #f6f1e6; }
         .option.wrong { background: #8d2430; color: #ffffff; border-color: #ffc3ca; }
-        .feedback { min-height: 46px; margin-top: 12px; color: #e8ffeb; font-size: 17px; line-height: 1.35; font-weight: bold; text-align: center; }
-        .next-btn, .restart-btn, .link-btn { width: 100%; min-height: 56px; border: 0; border-radius: 8px; padding: 12px; font-size: 19px; font-weight: bold; margin-top: 10px; background: #64f06f; color: #071f1a; }
-        .link-btn { background: #d7ff4f; }
+        .tile-sentence { display: block; }
+        .tile-part { display: inline-block; margin: 0.08em; }
+        .tile-slot { display: inline-block; min-width: 2.3em; margin: 0.06em 0.1em; padding: 0.08em 0.26em 0.16em 0.26em; border-radius: 8px; border: 2px solid #d6b04c; color: #d6b04c; background: rgba(214,176,76,0.08); font-size: 1.08em; line-height: 1; vertical-align: baseline; }
+        .tile-slot.done { color: #0f241d; background: #d6b04c; }
+        .tile-slot.active { box-shadow: 0 0 0 3px rgba(246,241,230,0.22); }
+        .feedback { min-height: 46px; margin-top: 12px; color: #f6f1e6; font-size: 17px; line-height: 1.35; font-weight: bold; text-align: center; }
+        .next-btn, .restart-btn, .link-btn { width: 100%; min-height: 56px; border: 0; border-radius: 8px; padding: 12px; font-size: 19px; font-weight: bold; margin-top: 10px; background: #6fbf73; color: #0f241d; }
+        .link-btn { background: #d6b04c; }
         .next-btn[disabled] { opacity: 0.42; }
-        .final-title { color: #64f06f; font-size: 25px; font-weight: bold; text-align: center; margin: 4px 0 10px 0; }
-        .final-score { background: #071f1a; border: 2px solid rgba(215,255,79,0.75); border-radius: 8px; padding: 14px; text-align: center; font-size: 20px; font-weight: bold; line-height: 1.45; margin-bottom: 12px; }
+        .final-title { color: #d6b04c; font-size: 25px; font-weight: bold; text-align: center; margin: 4px 0 10px 0; }
+        .final-score { background: #0f241d; border: 2px solid rgba(214,176,76,0.78); border-radius: 8px; padding: 14px; text-align: center; font-size: 20px; font-weight: bold; line-height: 1.45; margin-bottom: 12px; }
         .review-list { display: grid; gap: 8px; margin-top: 10px; }
         .review-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 10px; font-size: 16px; line-height: 1.35; }
-        @media (max-width: 390px) { .sentence { font-size: 25px; } .option { font-size: 20px; } .symbols .option { font-size: 34px; } .task { font-size: 20px; } }
+        @media (max-width: 390px) { .sentence { font-size: 25px; } .option { font-size: 20px; } .symbols .option { font-size: 34px; } .tiles .option { font-size: 31px; } .task { font-size: 20px; } }
     </style>
 </head>
 <body>
@@ -73,6 +85,8 @@
     var locked = false;
     var current = null;
     var misses = {};
+    var tileIndex = 0;
+    var tileFilled = [];
     var questions = [
         { type: 'symbols', area: 'Aussagesatz', icon: '.', hint: 'Ein Aussagesatz erzählt etwas und endet mit Punkt.', task: 'Welches Satzzeichen passt?', text: 'Der Ball rollt auf die Straße', options: ['.', '?', '!'], answer: '.', key: 'Aussagesatz' },
         { type: 'symbols', area: 'Aufforderung', icon: '!', hint: 'Eine Aufforderung klingt stark und endet oft mit Ausrufezeichen.', task: 'Welches Satzzeichen passt?', text: 'Beeilt euch', options: ['.', '?', '!'], answer: '!', key: 'Ausruf' },
@@ -89,6 +103,10 @@
         { type: 'choice', area: 'Antwortsatz', icon: '.', hint: 'Eine Antwort ist meist ein Aussagesatz mit Punkt.', task: 'Welche Antwort passt zur Frage?', text: 'Warum weinst du?', options: ['Ich habe meine Mütze verloren.', 'Wie alt bist du?', 'Bleib stehen!', 'Welche Bücher magst du?'], answer: 'Ich habe meine Mütze verloren.', key: 'Frage und Antwort' },
         { type: 'choice', area: 'Antwortsatz', icon: '.', hint: 'Eine Antwort ist meist ein Aussagesatz mit Punkt.', task: 'Welche Antwort passt zur Frage?', text: 'Was kommt mit zum See?', options: ['Der Rucksack kommt mit.', 'Wer ist hier?', 'Pass auf!', 'Wohin gehst du?'], answer: 'Der Rucksack kommt mit.', key: 'Frage und Antwort' },
         { type: 'choice', area: 'Antwortsatz', icon: '.', hint: 'Eine Antwort ist meist ein Aussagesatz mit Punkt.', task: 'Welche Antwort passt zur Frage?', text: 'Wohin möchtest du reisen?', options: ['Ich fahre nach Afrika.', 'Warum weinst du?', 'Nimm eine Mütze mit!', 'Wo ist Tim?'], answer: 'Ich fahre nach Afrika.', key: 'Frage und Antwort' },
+        { type: 'tiles', area: 'Komma-Kacheln', icon: ',', hint: 'Setze erst das Komma, dann und vor dem letzten Teil.', task: 'Welche Kachel passt in die Lücke?', parts: ['Ich packe Mütze', 'Sonnenbrille', 'Buch ein.'], answers: [',', 'und'], options: [',', 'und'], key: 'Komma-Kacheln' },
+        { type: 'tiles', area: 'Komma-Kacheln', icon: ',', hint: 'Bei zwei Dingen reicht und.', task: 'Welche Kachel passt in die Lücke?', parts: ['Ich nehme Rucksack', 'Buch mit.'], answers: ['und'], options: [',', 'und'], key: 'Komma-Kacheln' },
+        { type: 'tiles', area: 'Komma-Kacheln', icon: ',', hint: 'Mehrere Dinge: Komma, Komma, und.', task: 'Welche Kachel passt in die Lücke?', parts: ['Lisa packt Jacke', 'Mütze', 'Taschenlampe', 'Buch ein.'], answers: [',', ',', 'und'], options: [',', 'und'], key: 'Komma-Kacheln' },
+        { type: 'tiles', area: 'Komma-Kacheln', icon: ',', hint: 'Das und steht zwischen den beiden letzten Teilen.', task: 'Welche Kachel passt in die Lücke?', parts: ['Wir sehen Bus', 'Ampel', 'Warnschild.'], answers: [',', 'und'], options: [',', 'und'], key: 'Komma-Kacheln' },
         { type: 'choice', area: 'Komma', icon: ',', hint: 'Bei Aufzählungen trennt das Komma Dinge voneinander.', task: 'Welche Fortsetzung passt?', text: 'Ich packe meinen Rucksack ...', options: ['mit Mütze, Sonnenbrille und Buch.', 'mit Mütze Sonnenbrille und Buch.', 'mit Mütze, Sonnenbrille, und Buch.', 'mit Mütze und, Sonnenbrille Buch.'], answer: 'mit Mütze, Sonnenbrille und Buch.', key: 'Komma' },
         { type: 'choice', area: 'Komma', icon: ',', hint: 'Vor und steht in einfachen Aufzählungen meistens kein Komma.', task: 'Welche Aufzählung ist richtig?', text: 'Ich nehme ... mit.', options: ['Buch, Handschuhe und Sonnenbrille', 'Buch Handschuhe und Sonnenbrille', 'Buch, Handschuhe, und Sonnenbrille', 'Buch und, Handschuhe Sonnenbrille'], answer: 'Buch, Handschuhe und Sonnenbrille', key: 'Komma' },
         { type: 'choice', area: 'Komma', icon: ',', hint: 'Mehrere Dinge werden mit Kommas getrennt.', task: 'Welche Packliste ist richtig?', text: 'Für das Schullandheim brauche ich ...', options: ['Rucksack, Mütze, Buch und Taschenlampe.', 'Rucksack Mütze Buch und Taschenlampe.', 'Rucksack, Mütze, Buch, und Taschenlampe.', 'Rucksack und Mütze, Buch Taschenlampe.'], answer: 'Rucksack, Mütze, Buch und Taschenlampe.', key: 'Komma' },
@@ -110,11 +128,15 @@
     var feedbackBox = document.getElementById('feedbackBox');
     var nextBtn = document.getElementById('nextBtn');
     function shuffle(list) { var copy = list.slice(0); var i; var j; var temp; for (i = copy.length - 1; i > 0; i -= 1) { j = Math.floor(Math.random() * (i + 1)); temp = copy[i]; copy[i] = copy[j]; copy[j] = temp; } return copy; }
+    function escapeHtml(value) { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function markText(value) { return escapeHtml(value).replace(/,/g, '<span class="mark-comma">,</span>').replace(/\./g, '<span class="mark-point">.</span>').replace(/\?/g, '<span class="mark-question">?</span>').replace(/!/g, '<span class="mark-exclaim">!</span>'); }
     function startRound() { index = 0; correct = 0; locked = false; current = null; misses = {}; round = shuffle(questions).slice(0, roundSize); showQuestion(); }
     function updateTop() { scoreBox.innerHTML = correct + ' / ' + roundSize; progressFill.style.width = Math.round((index / roundSize) * 100) + '%'; }
-    function showQuestion() { var opts; var i; var btn; locked = false; nextBtn.disabled = true; feedbackBox.innerHTML = ''; current = round[index]; updateTop(); modeIcon.innerHTML = current.icon; modeLabel.innerHTML = current.area; hintText.innerHTML = current.hint; taskText.innerHTML = current.task; sentenceText.innerHTML = current.text; optionsBox.innerHTML = ''; optionsBox.className = current.type === 'symbols' ? 'options symbols' : 'options'; opts = shuffle(current.options); for (i = 0; i < opts.length; i += 1) { btn = document.createElement('button'); btn.type = 'button'; btn.className = 'option'; btn.innerHTML = opts[i]; btn.onclick = makeChoose(opts[i], btn); optionsBox.appendChild(btn); } }
+    function renderTileSentence() { var html = '<span class="tile-sentence">'; var i; for (i = 0; i < current.parts.length; i += 1) { html += '<span class="tile-part">' + markText(current.parts[i]) + '</span>'; if (i < current.answers.length) { if (tileFilled[i]) { html += '<span class="tile-slot done">' + markText(tileFilled[i]) + '</span>'; } else if (i === tileIndex) { html += '<span class="tile-slot active">___</span>'; } else { html += '<span class="tile-slot">___</span>'; } } } sentenceText.innerHTML = html + '</span>'; }
+    function showQuestion() { var opts; var i; var btn; locked = false; nextBtn.disabled = true; feedbackBox.innerHTML = ''; current = round[index]; tileIndex = 0; tileFilled = []; updateTop(); modeIcon.innerHTML = current.icon; modeLabel.innerHTML = current.area; hintText.innerHTML = current.hint; taskText.innerHTML = current.task; if (current.type === 'tiles') { renderTileSentence(); } else { sentenceText.innerHTML = current.text; } optionsBox.innerHTML = ''; optionsBox.className = current.type === 'symbols' ? 'options symbols' : (current.type === 'tiles' ? 'options tiles' : 'options'); opts = shuffle(current.options); for (i = 0; i < opts.length; i += 1) { btn = document.createElement('button'); btn.type = 'button'; btn.className = 'option'; btn.setAttribute('data-value', opts[i]); btn.innerHTML = markText(opts[i]); btn.onclick = makeChoose(opts[i], btn); optionsBox.appendChild(btn); } }
     function makeChoose(value, button) { return function () { choose(value, button); }; }
-    function choose(value, button) { var buttons; var i; if (locked) { return; } locked = true; buttons = optionsBox.getElementsByTagName('button'); for (i = 0; i < buttons.length; i += 1) { if (buttons[i].innerHTML === current.answer) { buttons[i].className = 'option correct'; } } if (value === current.answer) { correct += 1; feedbackBox.innerHTML = 'Treffer. Genau so steht der Satz sicher.'; } else { button.className = 'option wrong'; misses[current.key] = true; feedbackBox.innerHTML = 'Fast. Richtig ist: ' + current.answer; } nextBtn.disabled = false; updateTop(); }
+    function choose(value, button) { var buttons; var i; if (locked) { return; } if (current.type === 'tiles') { chooseTile(value, button); return; } locked = true; buttons = optionsBox.getElementsByTagName('button'); for (i = 0; i < buttons.length; i += 1) { if (buttons[i].getAttribute('data-value') === current.answer) { buttons[i].className = 'option correct'; } } if (value === current.answer) { correct += 1; feedbackBox.innerHTML = 'Treffer. Genau so steht der Satz sicher.'; } else { button.className = 'option wrong'; misses[current.key] = true; feedbackBox.innerHTML = 'Fast. Richtig ist: ' + markText(current.answer); } nextBtn.disabled = false; updateTop(); }
+    function chooseTile(value, button) { var expected = current.answers[tileIndex]; var buttons; var i; if (value === expected) { tileFilled[tileIndex] = value; tileIndex += 1; renderTileSentence(); if (tileIndex >= current.answers.length) { locked = true; correct += 1; buttons = optionsBox.getElementsByTagName('button'); for (i = 0; i < buttons.length; i += 1) { if (buttons[i].getAttribute('data-value') === value) { buttons[i].className = 'option correct'; } } feedbackBox.innerHTML = 'Treffer. Die Aufzählung ist vollständig.'; nextBtn.disabled = false; updateTop(); } else { feedbackBox.innerHTML = 'Gut. Jetzt die nächste Lücke.'; } } else { button.className = 'option wrong'; misses[current.key] = true; feedbackBox.innerHTML = 'Fast. In diese Lücke gehört: ' + markText(expected); } }
     function getGrade(percent) { if (percent >= 96) { return '1'; } if (percent >= 80) { return '2'; } if (percent >= 60) { return '3'; } if (percent >= 45) { return '4'; } if (percent >= 16) { return '5'; } return '6'; }
     function finishRound() { var percent = Math.round((correct / roundSize) * 100); var grade = getGrade(percent); var key; var review = ''; progressFill.style.width = '100%'; for (key in misses) { if (misses.hasOwnProperty(key)) { review += '<div class="review-item">Noch einmal üben: <b>' + key + '</b></div>'; } } if (review === '') { review = '<div class="review-item">Alles sicher: Punkt, Fragezeichen, Ausrufezeichen und Komma sitzen.</div>'; } card.innerHTML = '<div class="final-title">Satzzeichen-Runde geschafft</div>' + '<div class="final-score">' + correct + ' von ' + roundSize + ' richtig<br>' + percent + '% - Note ' + grade + '</div>' + '<div class="hint">Diese Runde nutzt Satzmuster aus Grüne Lola 3, Kapitel 5.</div>' + '<div class="review-list">' + review + '</div>' + '<button class="restart-btn" id="restartBtn" type="button">Nochmal mischen</button>' + '<button class="link-btn" id="menuBtn" type="button">Zur Kapitel-Auswahl</button>'; document.getElementById('restartBtn').onclick = function () { window.location.reload(); }; document.getElementById('menuBtn').onclick = function () { window.location.href = 'index.html'; }; }
     function nextQuestion() { if (!locked) { return; } index += 1; if (index >= roundSize) { finishRound(); } else { showQuestion(); } }
