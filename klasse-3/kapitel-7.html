@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang='de'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>Grüne Lola 3 - Klasse 3</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; padding: 12px; background: #071f1a; color: #ffffff; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.03em; }
+        .wrap { width: 100%; max-width: 540px; margin: 0 auto; }
+        header { text-align: center; padding: 8px 0 14px 0; }
+        h1 { margin: 0; color: #64f06f; font-size: 24px; line-height: 1.18; text-transform: uppercase; }
+        .menu { border: 2px solid #64f06f; border-radius: 8px; background: #123b2f; padding: 14px; box-shadow: 0 0 22px rgba(100,240,111,0.22); }
+        .section { color: #d7ff4f; font-size: 16px; font-weight: bold; text-transform: uppercase; margin: 12px 0 8px 0; border-bottom: 1px dashed rgba(215,255,79,0.55); padding-bottom: 5px; }
+        .section:first-child { margin-top: 0; }
+        .grid { display: grid; gap: 10px; }
+        button { width: 100%; min-height: 60px; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: #1c5a45; color: #ffffff; font-size: 19px; font-weight: bold; padding: 12px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        button:active { background: #64f06f; color: #071f1a; }
+        button.locked { opacity: 0.42; }
+        .active { border-color: #d7ff4f; }
+        .badge { color: #d7ff4f; background: rgba(0,0,0,0.28); border-radius: 8px; padding: 3px 8px; font-size: 13px; white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <div class='wrap'>
+        <header><h1>Grüne Lola - Klasse 3</h1></header>
+        <main class='menu'>
+            <div class='section'>Start: Kapitel 5</div>
+            <div class='grid'>
+                <button class='active' type='button' onclick="window.location.href='kapitel-5.html'"><span>Kapitel 5: Satzzeichen</span><span class='badge'>SPIELBAR</span></button>
+                <button class='active' type='button' onclick="window.location.href='kapitel-6.html'"><span>Kapitel 6: Wörtliche Rede</span><span class='badge'>SPIELBAR</span></button>
+                <button class='active' type='button' onclick="window.location.href='kapitel-7.html'"><span>Kapitel 7: Satzglieder</span><span class='badge'>SPIELBAR</span></button>
+            </div>
+            <div class='section'>Später wie bei Rote Lola</div>
+            <div class='grid'>
+                <button class='locked' type='button'><span>Kapitel 1-4</span><span class='badge'>folgt</span></button>
+                <button class='locked' type='button'><span>Kapitel 8</span><span class='badge'>folgt</span></button>
+                <button class='locked' type='button'><span>Meilenstein-Tests</span><span class='badge'>folgt</span></button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
 
