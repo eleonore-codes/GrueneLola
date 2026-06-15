@@ -1,44 +1,222 @@
 <!DOCTYPE html>
-<html lang='de'>
+<html lang="de">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <title>Grüne Lola 3 - Klasse 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gr&uuml;ne Lola - Kapitel 7</title>
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; min-height: 100vh; padding: 12px; background: #071f1a; color: #ffffff; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.03em; }
-        .wrap { width: 100%; max-width: 540px; margin: 0 auto; }
-        header { text-align: center; padding: 8px 0 14px 0; }
-        h1 { margin: 0; color: #64f06f; font-size: 24px; line-height: 1.18; text-transform: uppercase; }
-        .menu { border: 2px solid #64f06f; border-radius: 8px; background: #123b2f; padding: 14px; box-shadow: 0 0 22px rgba(100,240,111,0.22); }
-        .section { color: #d7ff4f; font-size: 16px; font-weight: bold; text-transform: uppercase; margin: 12px 0 8px 0; border-bottom: 1px dashed rgba(215,255,79,0.55); padding-bottom: 5px; }
-        .section:first-child { margin-top: 0; }
-        .grid { display: grid; gap: 10px; }
-        button { width: 100%; min-height: 60px; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: #1c5a45; color: #ffffff; font-size: 19px; font-weight: bold; padding: 12px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
-        button:active { background: #64f06f; color: #071f1a; }
-        button.locked { opacity: 0.42; }
-        .active { border-color: #d7ff4f; }
-        .badge { color: #d7ff4f; background: rgba(0,0,0,0.28); border-radius: 8px; padding: 3px 8px; font-size: 13px; white-space: nowrap; }
+        html, body { min-height: 100%; }
+        body { margin: 0; background: #0f241d; color: #f6f1e6; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.03em; user-select: none; -webkit-user-select: none; }
+        .arena { min-height: 100vh; display: flex; flex-direction: column; padding: 12px; background: radial-gradient(circle at 50% 0%, rgba(214,176,76,0.14), rgba(15,36,29,0) 34%), linear-gradient(180deg, #17382d 0%, #0f241d 62%); }
+        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; max-width: 540px; width: 100%; margin: 0 auto 10px auto; }
+        .nav-back { min-width: 78px; min-height: 44px; border: 1px solid #d6b04c; background: rgba(15,36,29,0.82); color: #f6f1e6; border-radius: 8px; font-size: 15px; font-weight: bold; }
+        .title { flex: 1; min-width: 0; text-align: center; color: #f6f1e6; font-size: 18px; font-weight: bold; text-transform: uppercase; }
+        .score { min-width: 78px; text-align: right; color: #f6f1e6; font-weight: bold; font-size: 15px; }
+        .progress-track { max-width: 540px; width: 100%; height: 13px; border-radius: 999px; overflow: hidden; margin: 0 auto 12px auto; background: #28473b; border: 1px solid rgba(246,241,230,0.18); }
+        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #d6b04c, #6fbf73); }
+        .card { max-width: 540px; width: 100%; margin: 0 auto; background: #17382d; border: 2px solid rgba(214,176,76,0.82); border-radius: 8px; padding: 15px; box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+        .mode-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .mode-icon { width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0f241d; background: #d6b04c; font-size: 27px; font-weight: bold; border: 3px solid #f6f1e6; flex: 0 0 auto; letter-spacing: 0; }
+        .mode-text { flex: 1; min-width: 0; }
+        .mode-label { color: #d6b04c; font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; }
+        .hint { color: #f6f1e6; font-size: 16px; line-height: 1.35; }
+        .task { font-size: 22px; line-height: 1.3; font-weight: bold; margin: 10px 0 12px 0; }
+        .sentence { background: #0f241d; border: 2px dashed #d6b04c; border-radius: 8px; min-height: 106px; padding: 14px; display: flex; align-items: center; justify-content: center; text-align: center; color: #f6f1e6; font-size: 25px; font-weight: bold; line-height: 1.28; margin-bottom: 12px; overflow-wrap: anywhere; }
+        .chunk { display: inline-block; margin: 0.1em 0.08em; padding: 0.12em 0.28em 0.18em 0.28em; border-radius: 8px; background: rgba(246,241,230,0.1); border: 1px solid rgba(246,241,230,0.22); }
+        .subject { color: #0f241d; background: #d6b04c; border-color: #f6f1e6; }
+        .predicate { color: #0f241d; background: #6fbf73; border-color: #f6f1e6; }
+        .question { color: #0f241d; background: #5fb7b0; border-color: #f6f1e6; }
+        .options { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .options.two { grid-template-columns: repeat(2, 1fr); }
+        .option { width: 100%; min-height: 62px; border: 2px solid rgba(246,241,230,0.24); border-radius: 8px; background: #225443; color: #f6f1e6; padding: 12px; font-size: 21px; font-weight: bold; line-height: 1.18; text-align: center; }
+        .two .option { min-height: 78px; }
+        .option:active { transform: scale(0.99); }
+        .option.correct { background: #6fbf73; color: #0f241d; border-color: #f6f1e6; }
+        .option.wrong { background: #8d2430; color: #ffffff; border-color: #ffc3ca; }
+        .feedback { min-height: 46px; margin-top: 12px; color: #f6f1e6; font-size: 17px; line-height: 1.35; font-weight: bold; text-align: center; }
+        .next-btn, .restart-btn, .link-btn { width: 100%; min-height: 56px; border: 0; border-radius: 8px; padding: 12px; font-size: 19px; font-weight: bold; margin-top: 10px; background: #6fbf73; color: #0f241d; }
+        .link-btn { background: #d6b04c; }
+        .next-btn[disabled] { opacity: 0.42; }
+        .final-title { color: #d6b04c; font-size: 25px; font-weight: bold; text-align: center; margin: 4px 0 10px 0; }
+        .final-score { background: #0f241d; border: 2px solid rgba(214,176,76,0.78); border-radius: 8px; padding: 14px; text-align: center; font-size: 20px; font-weight: bold; line-height: 1.45; margin-bottom: 12px; }
+        .review-list { display: grid; gap: 8px; margin-top: 10px; }
+        .review-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 10px; font-size: 16px; line-height: 1.35; }
+        @media (max-width: 390px) { .sentence { font-size: 22px; } .option { font-size: 19px; } .task { font-size: 20px; } .hint { font-size: 15px; } }
     </style>
 </head>
 <body>
-    <div class='wrap'>
-        <header><h1>Grüne Lola - Klasse 3</h1></header>
-        <main class='menu'>
-            <div class='section'>Start: Kapitel 5</div>
-            <div class='grid'>
-                <button class='active' type='button' onclick="window.location.href='kapitel-5.html'"><span>Kapitel 5: Satzzeichen</span><span class='badge'>SPIELBAR</span></button>
-                <button class='active' type='button' onclick="window.location.href='kapitel-6.html'"><span>Kapitel 6: Wörtliche Rede</span><span class='badge'>SPIELBAR</span></button>
-                <button class='active' type='button' onclick="window.location.href='kapitel-7.html'"><span>Kapitel 7: Satzglieder</span><span class='badge'>SPIELBAR</span></button>
+    <div class="arena">
+        <div class="topbar">
+            <button class="nav-back" id="backBtn" type="button">Zur&uuml;ck</button>
+            <div class="title">Kapitel 7</div>
+            <div class="score" id="scoreBox">0 / 14</div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <main class="card" id="card">
+            <div class="mode-row">
+                <div class="mode-icon" id="modeIcon">S</div>
+                <div class="mode-text">
+                    <div class="mode-label" id="modeLabel">Satzglieder</div>
+                    <div class="hint" id="hintText">Satzteile bleiben beim Umstellen zusammen.</div>
+                </div>
             </div>
-            <div class='section'>Später wie bei Rote Lola</div>
-            <div class='grid'>
-                <button class='locked' type='button'><span>Kapitel 1-4</span><span class='badge'>folgt</span></button>
-                <button class='locked' type='button'><span>Kapitel 8</span><span class='badge'>folgt</span></button>
-                <button class='locked' type='button'><span>Meilenstein-Tests</span><span class='badge'>folgt</span></button>
-            </div>
+            <div class="task" id="taskText"></div>
+            <div class="sentence" id="sentenceText"></div>
+            <div class="options" id="optionsBox"></div>
+            <div class="feedback" id="feedbackBox"></div>
+            <button class="next-btn" id="nextBtn" type="button" disabled>Weiter</button>
         </main>
     </div>
+<script>
+(function () {
+    var tasks = [
+        { icon: 'S', label: 'Satzglieder', hint: 'Ein Satz besteht aus mehreren Satzteilen.', task: 'Welche Kachel ist ein Satzglied?', sentence: '<span class="chunk">Paulina und Jana</span> <span class="chunk">gehen</span> <span class="chunk">heute</span> <span class="chunk">in den Zoo</span>.', options: ['Paulina und Jana', 'und Jana gehen', 'heute in', 'den Zoo gehen'], answer: 'Paulina und Jana', ok: 'Ja. Diese W&ouml;rter bleiben beim Umstellen zusammen.', no: 'Achte auf die ganzen Kacheln aus dem Satz.' },
+        { icon: '&harr;', label: 'Umstellen', hint: 'Ganze Satzglieder k&ouml;nnen ihren Platz wechseln.', task: 'Welcher Satz ist richtig umgestellt?', sentence: '<span class="chunk subject">Paulina und Jana</span> <span class="chunk predicate">gehen</span> <span class="chunk">heute</span> <span class="chunk">in den Zoo</span>.', options: ['Heute gehen Paulina und Jana in den Zoo.', 'Heute Paulina gehen und Jana in den Zoo.', 'In den gehen Zoo Paulina und Jana heute.', 'Paulina heute und Jana gehen in den Zoo.'], answer: 'Heute gehen Paulina und Jana in den Zoo.', ok: 'Richtig. Die Kacheln sind ganz geblieben.', no: 'Beim Umstellen d&uuml;rfen die Satzglieder nicht zerrei&szlig;en.' },
+        { icon: '?', label: 'Subjekt-Frage', hint: 'Nach dem Subjekt fragst du: Wer oder was?', task: 'Welche Frage passt zum Subjekt?', sentence: '<span class="chunk subject">Alle Kinder</span> freuen sich auf die Ferien.', options: ['Wer freut sich auf die Ferien?', 'Wann freuen sich alle?', 'Wo freuen sich alle?', 'Was tun die Ferien?'], answer: 'Wer freut sich auf die Ferien?', ok: 'Genau. Mit Wer findest du hier das Subjekt.', no: 'Das Subjekt findest du mit Wer oder Was.' },
+        { icon: 'W', label: 'Subjekt finden', hint: 'Das Subjekt sagt, wer oder was etwas tut.', task: 'Was ist das Subjekt?', sentence: '<span class="chunk">Seit Wochen</span> <span class="chunk predicate">ist</span> <span class="chunk subject">das Wetter</span> <span class="chunk">sommerlich</span>.', options: ['das Wetter', 'Seit Wochen', 'ist', 'sommerlich'], answer: 'das Wetter', ok: 'Ja. Was ist sommerlich? Das Wetter.', no: 'Frage: Was ist sommerlich?' },
+        { icon: 'P', label: 'Pr&auml;dikat', hint: 'Nach dem Pr&auml;dikat fragst du: Was tut jemand? Was geschieht?', task: 'Was ist das Pr&auml;dikat?', sentence: '<span class="chunk">In der Pause</span> <span class="chunk predicate">regnet</span> <span class="chunk">es</span>.', options: ['regnet', 'In der Pause', 'es', 'Pause'], answer: 'regnet', ok: 'Richtig. Regnet sagt, was geschieht.', no: 'Das Pr&auml;dikat ist hier das Tun- oder Geschehen-Wort.' },
+        { icon: 'P', label: 'Pr&auml;dikat finden', hint: 'Manchmal besteht das Pr&auml;dikat aus mehreren W&ouml;rtern.', task: 'Welches Pr&auml;dikat passt?', sentence: '<span class="chunk subject">Der Hausmeister</span> ___ <span class="chunk">Tische und St&uuml;hle</span>.', options: ['repariert', 'der Hausmeister', 'Tische und St&uuml;hle', 'im Klassenzimmer'], answer: 'repariert', ok: 'Genau. Was tut der Hausmeister? Er repariert.', no: 'Frage: Was tut der Hausmeister?' },
+        { icon: 'S', label: 'Subjekt oder Pr&auml;dikat', hint: 'Gelb fragt Wer/Was. Gr&uuml;n fragt Was tut?', task: 'Welche Kachel ist ein Subjekt?', sentence: '<span class="chunk subject">Die Lehrerin</span> <span class="chunk predicate">kopiert</span> <span class="chunk">die neuen Sch&uuml;lerlisten</span>.', optionsClass: 'two', options: ['Die Lehrerin', 'kopiert', 'die neuen Sch&uuml;lerlisten', 'neuen'], answer: 'Die Lehrerin', ok: 'Richtig. Wer kopiert? Die Lehrerin.', no: 'Das Subjekt antwortet auf Wer oder Was.' },
+        { icon: 'P', label: 'Subjekt oder Pr&auml;dikat', hint: 'Das Pr&auml;dikat ist der Handlungskern.', task: 'Welche Kachel ist ein Pr&auml;dikat?', sentence: '<span class="chunk subject">Alle</span> <span class="chunk predicate">gehen</span> <span class="chunk">ersch&ouml;pft nach Hause</span>.', optionsClass: 'two', options: ['gehen', 'Alle', 'nach Hause', 'ersch&ouml;pft'], answer: 'gehen', ok: 'Ja. Was tun alle? Sie gehen.', no: 'Das Pr&auml;dikat sagt, was getan wird.' },
+        { icon: '?', label: 'Frage bilden', hint: 'Steht das Verb am Anfang, entsteht eine Frage.', task: 'Welcher Satz ist eine Frage?', sentence: '<span class="chunk predicate">Gehen</span> <span class="chunk subject">Paulina und Jana</span> <span class="chunk">heute in den Zoo</span>?', options: ['Gehen Paulina und Jana heute in den Zoo?', 'Paulina und Jana gehen heute in den Zoo.', 'Heute gehen Paulina und Jana in den Zoo.', 'In den Zoo gehen Paulina und Jana heute.'], answer: 'Gehen Paulina und Jana heute in den Zoo?', ok: 'Genau. Das Verb steht vorn, also ist es eine Frage.', no: 'Suche den Satz mit Verb am Anfang und Fragezeichen.' },
+        { icon: 'B', label: 'Satz bauen', hint: 'Subjekt und Pr&auml;dikat reichen oft schon f&uuml;r den Satzkern.', task: 'Welche Kacheln bilden einen sinnvollen Satz?', sentence: '<span class="chunk">Sportplatz</span>', options: ['Anna und Nico rennen.', 'Anna und Nico um die Wette.', 'rennen mit Pia und Lukas.', 'an der Sprossenwand.'], answer: 'Anna und Nico rennen.', ok: 'Richtig. Subjekt plus Pr&auml;dikat ergeben einen Satzkern.', no: 'Ein Satz braucht hier Wer und Was tut.' },
+        { icon: 'B', label: 'Satz bauen', hint: 'Erg&auml;nzungen machen den Satz genauer.', task: 'Welcher Satz passt zum Bild?', sentence: '<span class="chunk subject">Pia und Lukas</span> <span class="chunk predicate">h&uuml;pfen</span> ...', options: ['auf dem Trampolin.', 'mit dem Ball.', 'an der Sprossenwand.', 'um die Wette.'], answer: 'auf dem Trampolin.', ok: 'Ja. Pia und Lukas h&uuml;pfen auf dem Trampolin.', no: 'H&uuml;pfen passt am besten zum Trampolin.' },
+        { icon: 'W', label: 'Wer oder was?', hint: 'Frage immer direkt zum Satz.', task: 'Was ist das Subjekt?', sentence: '<span class="chunk subject">Der Chor</span> <span class="chunk predicate">singt</span> <span class="chunk">Sommerlieder</span>.', options: ['Der Chor', 'singt', 'Sommerlieder', 'Lieder'], answer: 'Der Chor', ok: 'Genau. Wer singt? Der Chor.', no: 'Frage: Wer singt Sommerlieder?' },
+        { icon: 'P', label: 'Was geschieht?', hint: 'Das Pr&auml;dikat antwortet auf Was tut? oder Was geschieht?', task: 'Was ist das Pr&auml;dikat?', sentence: '<span class="chunk subject">Die Haare und die Trikots</span> <span class="chunk predicate">tropfen</span>.', options: ['tropfen', 'Die Haare und die Trikots', 'Trikots', 'Haare'], answer: 'tropfen', ok: 'Richtig. Was geschieht? Sie tropfen.', no: 'Hier ist das Geschehen wichtig.' },
+        { icon: '&harr;', label: 'Umstellen', hint: 'Auch nach dem Umstellen bleibt die Bedeutung &auml;hnlich.', task: 'Welcher Satz ist richtig umgestellt?', sentence: '<span class="chunk subject">Die M&auml;dchen</span> <span class="chunk predicate">besuchen</span> <span class="chunk">am liebsten</span> <span class="chunk">die Affen</span>.', options: ['Am liebsten besuchen die M&auml;dchen die Affen.', 'Am besuchen liebsten die M&auml;dchen die Affen.', 'Die M&auml;dchen am liebsten die Affen besuchen.', 'Affen die besuchen am liebsten M&auml;dchen.'], answer: 'Am liebsten besuchen die M&auml;dchen die Affen.', ok: 'Sehr gut. Alle Satzglieder bleiben zusammen.', no: 'Die Kachel am liebsten bleibt zusammen.' }
+    ];
+    var order = [];
+    var current = 0;
+    var score = 0;
+    var wrong = [];
+    var chosen = false;
+    var els = {};
+    function byId(id) { return document.getElementById(id); }
+    function shuffle(list) {
+        var i;
+        var j;
+        var temp;
+        for (i = list.length - 1; i > 0; i -= 1) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+        return list;
+    }
+    function makeOrder() {
+        var i;
+        order = [];
+        for (i = 0; i < tasks.length; i += 1) { order.push(i); }
+        shuffle(order);
+    }
+    function setProgress() {
+        els.scoreBox.innerHTML = current + ' / ' + tasks.length;
+        els.progressFill.style.width = Math.round((current / tasks.length) * 100) + '%';
+    }
+    function clearOptions() {
+        while (els.optionsBox.firstChild) { els.optionsBox.removeChild(els.optionsBox.firstChild); }
+    }
+    function makeOption(text, answer, task) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option';
+        btn.innerHTML = text;
+        btn.onclick = function () { choose(btn, text, answer, task); };
+        els.optionsBox.appendChild(btn);
+    }
+    function choose(btn, text, answer, task) {
+        var buttons;
+        var i;
+        if (chosen) { return; }
+        chosen = true;
+        buttons = els.optionsBox.getElementsByTagName('button');
+        for (i = 0; i < buttons.length; i += 1) {
+            buttons[i].disabled = true;
+            if (buttons[i].innerHTML === answer) { buttons[i].className += ' correct'; }
+        }
+        if (text === answer) {
+            score += 1;
+            btn.className += ' correct';
+            els.feedbackBox.innerHTML = task.ok;
+        } else {
+            btn.className += ' wrong';
+            els.feedbackBox.innerHTML = task.no;
+            wrong.push({ task: task.task, answer: answer });
+        }
+        els.nextBtn.disabled = false;
+    }
+    function renderTask() {
+        var task;
+        var opts;
+        var i;
+        chosen = false;
+        task = tasks[order[current]];
+        els.modeIcon.innerHTML = task.icon;
+        els.modeLabel.innerHTML = task.label;
+        els.hintText.innerHTML = task.hint;
+        els.taskText.innerHTML = task.task;
+        els.sentenceText.innerHTML = task.sentence;
+        els.feedbackBox.innerHTML = '';
+        els.nextBtn.disabled = true;
+        clearOptions();
+        els.optionsBox.className = 'options';
+        if (task.optionsClass) { els.optionsBox.className += ' ' + task.optionsClass; }
+        opts = task.options.slice(0);
+        shuffle(opts);
+        for (i = 0; i < opts.length; i += 1) { makeOption(opts[i], task.answer, task); }
+        setProgress();
+    }
+    function showFinal() {
+        var html;
+        var i;
+        els.progressFill.style.width = '100%';
+        els.scoreBox.innerHTML = score + ' / ' + tasks.length;
+        html = '<div class="final-title">Training geschafft!</div>';
+        html += '<div class="final-score">Du hast ' + score + ' von ' + tasks.length + ' Punkten geholt.<br>';
+        if (score >= 12) { html += 'Sehr sicher mit Subjekt und Pr&auml;dikat.'; }
+        else if (score >= 9) { html += 'Gute Runde. Satzglieder nochmal bewegen hilft.'; }
+        else { html += 'Weiter &uuml;ben: Erst Wer/Was fragen, dann Was tut fragen.'; }
+        html += '</div>';
+        if (wrong.length > 0) {
+            html += '<div class="review-list">';
+            for (i = 0; i < wrong.length; i += 1) {
+                html += '<div class="review-item"><strong>Noch einmal:</strong><br>' + wrong[i].task + '<br><strong>Richtig:</strong> ' + wrong[i].answer + '</div>';
+            }
+            html += '</div>';
+        }
+        html += '<button class="restart-btn" id="restartBtn" type="button">Nochmal spielen</button>';
+        html += '<button class="link-btn" id="menuBtn" type="button">Zum Turnierbaum</button>';
+        els.card.innerHTML = html;
+        byId('restartBtn').onclick = function () { window.location.reload(); };
+        byId('menuBtn').onclick = function () { window.location.href = 'index.html'; };
+    }
+    function next() {
+        current += 1;
+        if (current >= tasks.length) { showFinal(); }
+        else { renderTask(); }
+    }
+    function init() {
+        els.backBtn = byId('backBtn');
+        els.scoreBox = byId('scoreBox');
+        els.progressFill = byId('progressFill');
+        els.card = byId('card');
+        els.modeIcon = byId('modeIcon');
+        els.modeLabel = byId('modeLabel');
+        els.hintText = byId('hintText');
+        els.taskText = byId('taskText');
+        els.sentenceText = byId('sentenceText');
+        els.optionsBox = byId('optionsBox');
+        els.feedbackBox = byId('feedbackBox');
+        els.nextBtn = byId('nextBtn');
+        els.backBtn.onclick = function () { window.location.href = 'index.html'; };
+        els.nextBtn.onclick = next;
+        makeOrder();
+        renderTask();
+    }
+    init();
+}());
+</script>
 </body>
 </html>
-
