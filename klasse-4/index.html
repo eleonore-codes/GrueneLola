@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grüne Lola 4 · Lernportionen</title>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { min-height: 100%; }
+        body { margin: 0; padding: 14px 12px 28px 12px; background: #0f241d; color: #f7f1e3; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.02em; }
+        .wrap { width: 100%; max-width: 540px; margin: 0 auto; }
+        header { padding: 8px 4px 18px 4px; text-align: center; }
+        .eyebrow { color: #d6b04c; font-size: 14px; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; }
+        h1 { margin: 6px 0 5px 0; color: #f7f1e3; font-size: 28px; line-height: 1.15; }
+        .intro { margin: 0; color: #cde4d7; font-size: 17px; line-height: 1.45; }
+        .panel { margin-bottom: 16px; padding: 14px; border: 2px solid rgba(214,176,76,0.78); border-radius: 8px; background: #17382d; box-shadow: 0 12px 28px rgba(0,0,0,0.24); }
+        h2 { margin: 0 0 11px 0; color: #d6b04c; font-size: 18px; line-height: 1.25; }
+        .grid { display: grid; gap: 10px; }
+        .tile { width: 100%; min-height: 68px; padding: 12px 13px; border: 2px solid rgba(247,241,227,0.2); border-radius: 8px; background: #225443; color: #f7f1e3; font: inherit; text-align: left; display: flex; align-items: center; gap: 12px; }
+        .tile.active { border-color: #d6b04c; cursor: pointer; }
+        .tile.active:active { background: #6fae78; color: #0f241d; }
+        .tile.locked { opacity: 0.58; }
+        .number { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #0f241d; color: #d6b04c; font-size: 21px; font-weight: bold; }
+        .tile-text { flex: 1; min-width: 0; }
+        .tile-title { display: block; font-size: 19px; font-weight: bold; line-height: 1.2; }
+        .tile-sub { display: block; margin-top: 4px; color: #cde4d7; font-size: 14px; line-height: 1.3; }
+        .badge { flex: 0 0 auto; padding: 5px 8px; border-radius: 8px; background: rgba(15,36,29,0.72); color: #d6b04c; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .back { display: block; min-height: 48px; padding: 13px; border: 1px solid #d6b04c; border-radius: 8px; color: #f7f1e3; text-align: center; text-decoration: none; font-size: 17px; font-weight: bold; }
+        @media (max-width: 370px) { .tile { gap: 9px; padding: 10px; } .tile-title { font-size: 17px; } .badge { font-size: 11px; } }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="eyebrow">Grüne Lola</div>
+            <h1>Klasse 4</h1>
+            <p class="intro">Wähle eine kleine Lernportion.</p>
+        </header>
+        <main>
+            <section class="panel" aria-labelledby="learningTitle">
+                <h2 id="learningTitle">Lernportionen</h2>
+                <div class="grid">
+                    <button class="tile active" id="chapter1Btn" type="button"><span class="number">1</span><span class="tile-text"><span class="tile-title">Nomen</span><span class="tile-sub">Erkennen, bilden und in vier Fällen nutzen</span></span><span class="badge">Start</span></button>
+                    <div class="tile locked"><span class="number">2</span><span class="tile-text"><span class="tile-title">Verben</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">3</span><span class="tile-text"><span class="tile-title">Zeitformen</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">4</span><span class="tile-text"><span class="tile-title">Adjektive</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">5</span><span class="tile-text"><span class="tile-title">Wortartenbestimmung</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">6</span><span class="tile-text"><span class="tile-title">Sätze</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">7</span><span class="tile-text"><span class="tile-title">Satzglieder</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">8</span><span class="tile-text"><span class="tile-title">Redewendungen und Merksprüche</span></span><span class="badge">folgt</span></div>
+                </div>
+            </section>
+            <section class="panel" aria-labelledby="testsTitle">
+                <h2 id="testsTitle">Klassenarbeiten</h2>
+                <div class="grid">
+                    <div class="tile locked"><span class="number">1</span><span class="tile-text"><span class="tile-title">Klassenarbeit 1</span><span class="tile-sub">Kapitel 1–3</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">2</span><span class="tile-text"><span class="tile-title">Klassenarbeit 2</span><span class="tile-sub">Kapitel 4–6</span></span><span class="badge">folgt</span></div>
+                    <div class="tile locked"><span class="number">3</span><span class="tile-text"><span class="tile-title">Klassenarbeit 3</span><span class="tile-sub">Kapitel 7–8</span></span><span class="badge">folgt</span></div>
+                </div>
+            </section>
+            <a class="back" href="../index.html">Zur Klassen-Auswahl</a>
+        </main>
+    </div>
+    <script>
+    (function () {
+        var chapter1Btn = document.getElementById('chapter1Btn');
+        chapter1Btn.addEventListener('click', function () { window.location.href = 'kapitel-1.html'; });
+    }());
+    </script>
+</body>
+</html>
