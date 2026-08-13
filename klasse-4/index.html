@@ -42,7 +42,7 @@
                 <div class="grid">
                     <button class="tile active" id="chapter1Btn" type="button"><span class="number">1</span><span class="tile-text"><span class="tile-title">Nomen</span><span class="tile-sub">Erkennen, bilden und in vier Fällen nutzen</span></span><span class="badge">Start</span></button>
                     <button class="tile active" id="chapter2Btn" type="button"><span class="number">2</span><span class="tile-text"><span class="tile-title">Verben</span><span class="tile-sub">Grundform, Aufforderung und Vorsilben</span></span><span class="badge">Start</span></button>
-                    <div class="tile locked"><span class="number">3</span><span class="tile-text"><span class="tile-title">Zeitformen</span></span><span class="badge">folgt</span></div>
+                    <button class="tile active" id="chapter3Btn" type="button"><span class="number">3</span><span class="tile-text"><span class="tile-title">Zeitformen</span><span class="tile-sub">Gegenwart, Vergangenheit und Zukunft</span></span><span class="badge">Start</span></button>
                     <div class="tile locked"><span class="number">4</span><span class="tile-text"><span class="tile-title">Adjektive</span></span><span class="badge">folgt</span></div>
                     <div class="tile locked"><span class="number">5</span><span class="tile-text"><span class="tile-title">Wortartenbestimmung</span></span><span class="badge">folgt</span></div>
                     <div class="tile locked"><span class="number">6</span><span class="tile-text"><span class="tile-title">Sätze</span></span><span class="badge">folgt</span></div>
@@ -65,8 +65,10 @@
     (function () {
         var chapter1Btn = document.getElementById('chapter1Btn');
         var chapter2Btn = document.getElementById('chapter2Btn');
+        var chapter3Btn = document.getElementById('chapter3Btn');
         chapter1Btn.addEventListener('click', function () { window.location.href = 'kapitel-1.html'; });
         chapter2Btn.addEventListener('click', function () { window.location.href = 'kapitel-2.html'; });
+        chapter3Btn.addEventListener('click', function () { window.location.href = 'kapitel-3.html'; });
     }());
     </script>
 </body>
