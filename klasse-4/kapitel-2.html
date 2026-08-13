@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grüne Lola 4 · Kapitel 2 · Verben</title>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { min-height: 100%; }
+        body { margin: 0; background: #0f241d; color: #f7f1e3; font-family: Arial, Verdana, sans-serif; letter-spacing: 0.02em; -webkit-user-select: none; user-select: none; }
+        button { font-family: inherit; }
+        .arena { min-height: 100vh; padding: 12px; background: radial-gradient(circle at 50% 0%, rgba(214,176,76,0.14), rgba(15,36,29,0) 35%), linear-gradient(180deg, #17382d 0%, #0f241d 68%); }
+        .topbar { width: 100%; max-width: 540px; margin: 0 auto 10px auto; display: flex; align-items: center; gap: 8px; }
+        .nav-btn, .read-btn { min-height: 48px; padding: 8px 11px; border: 1px solid #d6b04c; border-radius: 8px; background: rgba(15,36,29,0.86); color: #f7f1e3; font-size: 15px; font-weight: bold; }
+        .title { flex: 1; min-width: 0; text-align: center; font-size: 18px; font-weight: bold; }
+        .progress-line { width: 100%; max-width: 540px; height: 13px; margin: 0 auto 12px auto; overflow: hidden; border: 1px solid rgba(247,241,227,0.2); border-radius: 8px; background: #28473b; }
+        .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, #d6b04c, #6fae78); }
+        .card { width: 100%; max-width: 540px; margin: 0 auto; padding: 15px; border: 2px solid rgba(214,176,76,0.82); border-radius: 8px; background: #17382d; box-shadow: 0 12px 30px rgba(0,0,0,0.26); }
+        .start-title, .final-title { margin: 2px 0 8px 0; color: #d6b04c; font-size: 27px; line-height: 1.2; text-align: center; }
+        .lead { margin: 0 0 14px 0; color: #d5e8dc; font-size: 17px; line-height: 1.45; text-align: center; }
+        .mode-grid, .options { display: grid; gap: 10px; }
+        .mode-btn, .option, .main-btn, .help-btn { width: 100%; min-height: 58px; padding: 12px; border: 2px solid rgba(247,241,227,0.22); border-radius: 8px; background: #225443; color: #f7f1e3; font-size: 19px; font-weight: bold; line-height: 1.25; }
+        .mode-btn { text-align: left; }
+        .mode-btn small { display: block; margin-top: 4px; color: #cde4d7; font-size: 14px; font-weight: normal; }
+        .station-list { margin-top: 15px; padding: 12px; border-radius: 8px; background: #102a22; color: #d5e8dc; font-size: 15px; line-height: 1.55; }
+        .station-list strong, .station-name { color: #d6b04c; }
+        .task-head { display: flex; align-items: center; gap: 11px; margin-bottom: 11px; }
+        .station-number { width: 54px; min-height: 54px; flex: 0 0 54px; display: flex; align-items: center; justify-content: center; border: 2px solid #f7f1e3; border-radius: 8px; background: #d6b04c; color: #0f241d; font-size: 24px; font-weight: bold; }
+        .station-name { font-size: 14px; font-weight: bold; text-transform: uppercase; }
+        .instruction { margin-top: 3px; color: #d5e8dc; font-size: 16px; line-height: 1.35; }
+        .question { margin: 9px 0 11px 0; font-size: 22px; font-weight: bold; line-height: 1.3; }
+        .focus { min-height: 94px; margin-bottom: 12px; padding: 14px; display: flex; align-items: center; justify-content: center; border: 2px dashed #d6b04c; border-radius: 8px; background: #0f241d; font-size: 27px; font-weight: bold; line-height: 1.4; text-align: center; overflow-wrap: anywhere; }
+        .word, .verb-part { display: inline-block; margin: 3px; padding: 4px 8px 6px 8px; border-radius: 8px; }
+        .word { background: #f7f1e3; color: #0f241d; }
+        .verb-part { background: #78b982; color: #0f241d; }
+        .prefix { background: #72b9b1; color: #0f241d; }
+        .verb-link { display: inline-block; min-width: 44px; color: #d6b04c; border-bottom: 3px solid #d6b04c; }
+        .punctuation { display: inline-flex; width: 54px; min-height: 54px; align-items: center; justify-content: center; border-radius: 8px; background: #d6b04c; color: #0f241d; font-size: 38px; }
+        .option { text-align: center; }
+        .option.correct { background: #78b982; color: #0f241d; border-color: #f7f1e3; }
+        .option.wrong { background: #6b4850; border-color: #d7a8af; }
+        .option[disabled] { opacity: 0.72; }
+        .feedback { min-height: 52px; margin-top: 11px; padding: 8px 4px; font-size: 17px; font-weight: bold; line-height: 1.4; text-align: center; }
+        .help-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+        .help-btn { min-height: 52px; background: #17382d; border-color: #72b9b1; font-size: 16px; }
+        .main-btn { margin-top: 9px; border: 0; background: #78b982; color: #0f241d; }
+        .main-btn[disabled] { opacity: 0.42; }
+        .help-box { display: none; margin: 10px 0; padding: 12px; border: 2px solid #72b9b1; border-radius: 8px; background: #102a22; font-size: 17px; line-height: 1.45; }
+        .help-box.show { display: block; }
+        .summary-group { margin: 13px 0; padding: 12px; border-radius: 8px; background: #102a22; }
+        .summary-group h2 { margin: 0 0 8px 0; color: #d6b04c; font-size: 20px; }
+        .summary-item { margin: 6px 0; padding: 9px; border-radius: 8px; background: rgba(247,241,227,0.08); font-size: 16px; line-height: 1.35; }
+        .saved-note { color: #cde4d7; font-size: 14px; text-align: center; }
+        .reading body { letter-spacing: 0.04em; }
+        .reading .question { font-size: 25px; line-height: 1.5; }
+        .reading .focus { font-size: 30px; line-height: 1.55; }
+        .reading .option { min-height: 68px; font-size: 21px; line-height: 1.45; }
+        @media (max-width: 390px) { .arena { padding: 9px; } .nav-btn, .read-btn { padding: 7px; font-size: 14px; } .title { font-size: 16px; } .focus { font-size: 23px; } .question { font-size: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="arena">
+        <div class="topbar"><button class="nav-btn" id="backBtn" type="button">Zurück</button><div class="title">Kapitel 2 · Verben</div><button class="read-btn" id="readBtn" type="button" aria-pressed="false">Lesehilfe</button></div>
+        <div class="progress-line" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+        <main class="card" id="card"></main>
+    </div>
+<script>
+(function () {
+    var STORAGE_KEY = 'grueneLola4.chapter2.progress.v1';
+    var READING_KEY = 'grueneLola4.readingHelp.v1';
+    var competencies = { erkennen: 'Verben erkennen', grundform: 'Grundform finden', personalform: 'Personalformen bilden', aufforderung: 'Aufforderungsformen nutzen', satzzeichen: 'Aufforderungen mit ! schreiben', vorsilbe: 'Vorsilben erkennen', trennbar: 'Trennbare Verben nutzen' };
+    var tasks = [
+        { id: 'k2-s1-a', chapter: 2, station: 1, stationName: 'Verb-Detektiv', competency: 'erkennen', difficulty: 1, appType: 'choice', question: 'Welches Wort ist ein Verb?', display: 'Was kann jemand <span class="verb-part">tun</span>?', options: ['laufen', 'der Weg', 'schnell'], answer: 'laufen', help1: 'Ein Verb sagt, was jemand tut.', help2: 'Was kann ein Kind tun?', help3: 'Ein Kind kann laufen.', pdfTask: 'Kreise das Verb ein: laufen, der Weg, schnell.', pdfAnswer: 'laufen', test: 1 },
+        { id: 'k2-s1-b', chapter: 2, station: 1, stationName: 'Verb-Detektiv', competency: 'erkennen', difficulty: 1, appType: 'choice', question: 'Welches Wort ist ein Verb?', display: 'Suche das <span class="verb-part">Tun-Wort</span>.', options: ['malen', 'das Bild', 'bunt'], answer: 'malen', help1: 'Ein Verb nennt eine Tätigkeit.', help2: 'Was tut jemand mit einem Pinsel?', help3: 'Jemand kann malen.', pdfTask: 'Kreise das Verb ein: malen, das Bild, bunt.', pdfAnswer: 'malen', test: 1 },
+        { id: 'k2-s2-a', chapter: 2, station: 2, stationName: 'Verben-Verwandlung', competency: 'grundform', difficulty: 1, appType: 'choice', question: 'Wie lautet die Grundform?', display: '<span class="word">du spielst</span>', options: ['spielen', 'malen', 'rufen'], answer: 'spielen', help1: 'Die Grundform endet hier auf -en.', help2: 'Was tust du? Du spielst. Was kann man tun?', help3: 'du spielst → spielen', pdfTask: 'Nenne die Grundform von spielst.', pdfAnswer: 'spielen', test: 1 },
+        { id: 'k2-s2-b', chapter: 2, station: 2, stationName: 'Verben-Verwandlung', competency: 'grundform', difficulty: 1, appType: 'choice', question: 'Wie lautet die Grundform?', display: '<span class="word">er schreibt</span>', options: ['schreiben', 'lesen', 'rechnen'], answer: 'schreiben', help1: 'Die Grundform steht im Wörterbuch.', help2: 'Was kann man tun?', help3: 'er schreibt → schreiben', pdfTask: 'Nenne die Grundform von schreibt.', pdfAnswer: 'schreiben', test: 1 },
+        { id: 'k2-s3-a', chapter: 2, station: 3, stationName: 'Wer macht was?', competency: 'personalform', difficulty: 1, appType: 'choice', question: 'Welche Verbform passt?', display: '<span class="word">wir</span> ___ im Hof.', options: ['spielen', 'spielt', 'spielst'], answer: 'spielen', help1: 'Das Satzwort wir ist wichtig.', help2: 'Sprich: wir spielen.', help3: 'Setze spielen ein.', pdfTask: 'Ergänze: Wir ___ im Hof.', pdfAnswer: 'spielen', test: 1 },
+        { id: 'k2-s3-b', chapter: 2, station: 3, stationName: 'Wer macht was?', competency: 'personalform', difficulty: 1, appType: 'choice', question: 'Welche Verbform passt?', display: '<span class="word">Mila</span> ___ ein Buch.', options: ['liest', 'lesen', 'lese'], answer: 'liest', help1: 'Die Verbform muss zu Mila passen.', help2: 'Sprich: Mila liest.', help3: 'Setze liest ein.', pdfTask: 'Ergänze: Mila ___ ein Buch.', pdfAnswer: 'liest', test: 1 },
+        { id: 'k2-s4-a', chapter: 2, station: 4, stationName: 'Ruf es zu!', competency: 'aufforderung', difficulty: 1, appType: 'choice', question: 'Was rufst du einem Kind zu?', display: '<span class="word">leise sprechen</span>', options: ['Sprich leise!', 'Sprecht leise!', 'Wir sprechen leise.'], answer: 'Sprich leise!', help1: 'Du sprichst ein Kind an.', help2: 'Die Aufforderung beginnt mit Sprich.', help3: 'Tippe Sprich leise!', pdfTask: 'Bilde die Aufforderung an ein Kind: leise sprechen.', pdfAnswer: 'Sprich leise!', test: 1 },
+        { id: 'k2-s4-b', chapter: 2, station: 4, stationName: 'Ruf es zu!', competency: 'aufforderung', difficulty: 1, appType: 'choice', question: 'Was rufst du mehreren Kindern zu?', display: '<span class="word">langsam gehen</span>', options: ['Geht langsam!', 'Geh langsam!', 'Sie gehen langsam.'], answer: 'Geht langsam!', help1: 'Du sprichst mehrere Kinder an.', help2: 'Bei mehreren heißt es Geht.', help3: 'Tippe Geht langsam!', pdfTask: 'Bilde die Aufforderung an mehrere Kinder: langsam gehen.', pdfAnswer: 'Geht langsam!', test: 1 },
+        { id: 'k2-s4-c', chapter: 2, station: 4, stationName: 'Ruf es zu!', competency: 'satzzeichen', difficulty: 1, appType: 'choice', question: 'Welches Satzzeichen passt?', display: 'Komm bitte her <span class="punctuation">□</span>', options: ['!', '.', '?'], answer: '!', help1: 'Der Satz ist eine Aufforderung.', help2: 'Eine Aufforderung klingt wie ein Ruf.', help3: 'Setze ein Ausrufezeichen.', pdfTask: 'Setze das Satzzeichen: Komm bitte her', pdfAnswer: '!', test: 1 },
+        { id: 'k2-s5-a', chapter: 2, station: 5, stationName: 'Vorsilben-Werkstatt', competency: 'vorsilbe', difficulty: 1, appType: 'choice', question: 'Welche Vorsilbe gehört zum Verb?', display: '<span class="prefix word">auf</span><span class="verb-part">bauen</span>', options: ['auf-', 'ab-', 'vor-'], answer: 'auf-', help1: 'Die Vorsilbe steht vorn.', help2: 'Welcher türkise Teil steht vor bauen?', help3: 'Die Vorsilbe ist auf-.', pdfTask: 'Markiere die Vorsilbe in aufbauen.', pdfAnswer: 'auf-', test: 1 },
+        { id: 'k2-s5-b', chapter: 2, station: 5, stationName: 'Vorsilben-Werkstatt', competency: 'vorsilbe', difficulty: 1, appType: 'choice', question: 'Welche Vorsilbe gehört zum Verb?', display: '<span class="prefix word">ein</span><span class="verb-part">packen</span>', options: ['ein-', 'aus-', 'an-'], answer: 'ein-', help1: 'Die Vorsilbe steht vorn.', help2: 'Welcher türkise Teil steht vor packen?', help3: 'Die Vorsilbe ist ein-.', pdfTask: 'Markiere die Vorsilbe in einpacken.', pdfAnswer: 'ein-', test: 1 },
+        { id: 'k2-s6-a', chapter: 2, station: 6, stationName: 'Vorsilben-Challenge', competency: 'trennbar', difficulty: 2, appType: 'choice', question: 'Welcher Satz passt zum Verb?', display: '<span class="prefix word">auf</span><span class="verb-part">bauen</span> <span class="verb-link">↔</span>', options: ['Mia baut das Zelt auf.', 'Mia malt das Zelt an.', 'Mia räumt das Zelt weg.'], answer: 'Mia baut das Zelt auf.', help1: 'Im Satz reisen die Verbteile auseinander.', help2: 'Suche baut und auf im selben Satz.', help3: 'baut ... auf gehört zu aufbauen.', pdfTask: 'Schreibe aufbauen in den Satz: Mia ___ das Zelt ___.', pdfAnswer: 'baut, auf', test: 1 },
+        { id: 'k2-s6-b', chapter: 2, station: 6, stationName: 'Vorsilben-Challenge', competency: 'trennbar', difficulty: 2, appType: 'choice', question: 'Welcher Satz passt zum Verb?', display: '<span class="prefix word">ein</span><span class="verb-part">packen</span> <span class="verb-link">↔</span>', options: ['Noah packt das Buch ein.', 'Noah liest das Buch vor.', 'Noah schlägt das Buch auf.'], answer: 'Noah packt das Buch ein.', help1: 'Im Satz reisen die Verbteile auseinander.', help2: 'Suche packt und ein im selben Satz.', help3: 'packt ... ein gehört zu einpacken.', pdfTask: 'Schreibe einpacken in den Satz: Noah ___ das Buch ___.', pdfAnswer: 'packt, ein', test: 1 },
+        { id: 'k2-s7-a', chapter: 2, station: 7, stationName: 'Verben-Meisterschaft', competency: 'trennbar', difficulty: 2, appType: 'choice', question: 'Welche Grundform gehört zum Satz?', display: 'Lina <span class="verb-part">ruft</span> ihre Freundin <span class="prefix word">an</span>.', options: ['anrufen', 'aufrufen', 'zurufen'], answer: 'anrufen', help1: 'Verbteile: ruft und an.', help2: 'Setze an vor die Grundform rufen.', help3: 'an + rufen = anrufen', pdfTask: 'Nenne die Grundform: Lina ruft ihre Freundin an.', pdfAnswer: 'anrufen', test: 1 },
+        { id: 'k2-s7-b', chapter: 2, station: 7, stationName: 'Verben-Meisterschaft', competency: 'aufforderung', difficulty: 2, appType: 'choice', question: 'Welche Aufforderung passt?', display: 'Zwei Kinder sollen die Tür <span class="verb-part">zumachen</span>.', options: ['Macht die Tür zu!', 'Mach die Tür zu!', 'Ihr macht die Tür zu.'], answer: 'Macht die Tür zu!', help1: 'Du sprichst zwei Kinder an.', help2: 'Mehrere: Macht!', help3: 'Macht ... zu ist die Aufforderung.', pdfTask: 'Bilde die Aufforderung an zwei Kinder: die Tür zumachen.', pdfAnswer: 'Macht die Tür zu!', test: 1 },
+        { id: 'k2-s8-a', chapter: 2, station: 8, stationName: 'Lernraupe', competency: 'grundform', difficulty: 2, appType: 'choice', question: 'Welche Reihe gehört zusammen?', display: 'Grundform ↔ Personalform', options: ['lesen ↔ du liest', 'malen ↔ du rechnest', 'rufen ↔ du spielst'], answer: 'lesen ↔ du liest', help1: 'Beide Formen müssen dasselbe Tun nennen.', help2: 'Was gehört zu liest?', help3: 'liest gehört zu lesen.', pdfTask: 'Verbinde die Grundform mit der Personalform.', pdfAnswer: 'lesen – du liest', test: 1 },
+        { id: 'k2-s8-b', chapter: 2, station: 8, stationName: 'Lernraupe', competency: 'trennbar', difficulty: 2, appType: 'choice', question: 'Welche Reihe gehört zusammen?', display: 'Grundform ↔ Satzform', options: ['vorlesen ↔ liest vor', 'einpacken ↔ baut auf', 'aufräumen ↔ ruft an'], answer: 'vorlesen ↔ liest vor', help1: 'Die Vorsilbe muss gleich bleiben.', help2: 'Suche vor in beiden Formen.', help3: 'vorlesen wird zu liest ... vor.', pdfTask: 'Verbinde vorlesen mit der Satzform.', pdfAnswer: 'liest vor', test: 1 }
+    ];
+    var card = document.getElementById('card');
+    var progressFill = document.getElementById('progressFill');
+    var backBtn = document.getElementById('backBtn');
+    var readBtn = document.getElementById('readBtn');
+    var round = [];
+    var position = 0;
+    var currentTask = null;
+    var attemptsThisTask = 0;
+    var helpLevel = 0;
+    var answered = false;
+    var sessionStats = {};
+    var reviewScheduled = {};
+    var savedStats = loadObject(STORAGE_KEY);
+    function loadObject(key) { try { var value = window.localStorage.getItem(key); return value ? JSON.parse(value) : {}; } catch (error) { return {}; } }
+    function saveObject(key, value) { try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (error) { return; } }
+    function shuffle(list) { var copy = list.slice(0); var i; var j; var temp; for (i = copy.length - 1; i > 0; i -= 1) { j = Math.floor(Math.random() * (i + 1)); temp = copy[i]; copy[i] = copy[j]; copy[j] = temp; } return copy; }
+    function escapeHtml(value) { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function getStat(store, key) { if (!store[key]) { store[key] = { attempts: 0, direct: 0, helped: 0, uncertain: 0 }; } return store[key]; }
+    function startScreen() { progressFill.style.width = '0%'; card.innerHTML = '<h1 class="start-title">Verben bewegen</h1><p class="lead">Erst erkennen. Dann verwandeln. Zum Schluss anwenden.</p><div class="mode-grid"><button class="mode-btn" data-size="6" type="button">Kurze Runde<small>6 kleine Aufgaben</small></button><button class="mode-btn" data-size="8" type="button">Normale Runde<small>jede Station einmal</small></button><button class="mode-btn" data-size="16" type="button">Meisterrunde<small>16 gemischte Aufgaben</small></button></div><div class="station-list"><strong>8 Stationen</strong><br>Verb-Detektiv · Verben-Verwandlung · Wer macht was? · Ruf es zu! · Vorsilben-Werkstatt · Vorsilben-Challenge · Verben-Meisterschaft · Lernraupe</div>'; bindModeButtons(); }
+    function bindModeButtons() { var buttons = card.getElementsByTagName('button'); var i; for (i = 0; i < buttons.length; i += 1) { if (buttons[i].getAttribute('data-size')) { buttons[i].addEventListener('click', startRound); } } }
+    function startRound(event) { var size = parseInt(event.currentTarget.getAttribute('data-size'), 10); var pool = shuffle(tasks); var picked = []; var station; var i; if (size === 8) { for (station = 1; station <= 8; station += 1) { for (i = 0; i < pool.length; i += 1) { if (pool[i].station === station) { picked.push(pool[i]); break; } } } round = shuffle(picked); } else { round = pool.slice(0, size); } position = 0; sessionStats = {}; reviewScheduled = {}; showTask(); }
+    function updateProgress() { progressFill.style.width = Math.round((position / round.length) * 100) + '%'; }
+    function makeOption(text) { var button = document.createElement('button'); button.type = 'button'; button.className = 'option'; button.setAttribute('data-value', text); button.innerHTML = escapeHtml(text); button.addEventListener('click', chooseAnswer); document.getElementById('optionsBox').appendChild(button); }
+    function showTask() { var options; var i; currentTask = round[position]; attemptsThisTask = 0; helpLevel = 0; answered = false; updateProgress(); card.innerHTML = '<div class="task-head"><div class="station-number">' + currentTask.station + '</div><div><div class="station-name">' + escapeHtml(currentTask.stationName) + '</div><div class="instruction">Aufgabe ' + (position + 1) + ' von ' + round.length + '</div></div></div><div class="question">' + escapeHtml(currentTask.question) + '</div><div class="focus">' + currentTask.display + '</div><div class="help-box" id="helpBox" aria-live="polite"></div><div class="options" id="optionsBox"></div><div class="feedback" id="feedbackBox" aria-live="polite"></div><div class="help-row"><button class="help-btn" id="helpBtn" type="button">Hilfe 1</button><button class="help-btn" id="newBtn" type="button">Neue Aufgabe</button></div><button class="main-btn" id="nextBtn" type="button" disabled>Weiter</button>'; options = shuffle(currentTask.options); for (i = 0; i < options.length; i += 1) { makeOption(options[i]); } document.getElementById('helpBtn').addEventListener('click', showHelp); document.getElementById('newBtn').addEventListener('click', replaceTask); document.getElementById('nextBtn').addEventListener('click', nextTask); }
+    function chooseAnswer(event) { var button = event.currentTarget; var value = button.getAttribute('data-value'); var feedback = document.getElementById('feedbackBox'); var buttons; var i; var stat; if (answered) { return; } attemptsThisTask += 1; if (value === currentTask.answer) { answered = true; button.className += ' correct'; stat = getStat(sessionStats, currentTask.competency); stat.attempts += 1; if (attemptsThisTask === 1 && helpLevel === 0) { stat.direct += 1; feedback.innerHTML = 'Richtig. ' + escapeHtml(competencies[currentTask.competency]) + ' klappt hier schon gut.'; } else { stat.helped += 1; feedback.innerHTML = 'Geschafft. Richtig ist: <strong>' + escapeHtml(currentTask.answer) + '</strong>'; } scheduleReview(); buttons = document.getElementById('optionsBox').getElementsByTagName('button'); for (i = 0; i < buttons.length; i += 1) { buttons[i].disabled = true; } document.getElementById('nextBtn').disabled = false; document.getElementById('helpBtn').disabled = true; } else { button.className += ' wrong'; button.disabled = true; feedback.innerHTML = attemptsThisTask === 1 ? 'Noch nicht. Nutze eine Hilfe oder tippe eine andere Kachel.' : 'Schau auf die Verbteile. Alle Schreibweisen in den Kacheln sind richtig.'; if (attemptsThisTask >= 2) { getStat(sessionStats, currentTask.competency).uncertain += 1; } } }
+    function scheduleReview() { var alternatives = []; var i; if ((attemptsThisTask < 2 && helpLevel < 2) || reviewScheduled[currentTask.competency]) { return; } for (i = 0; i < tasks.length; i += 1) { if (tasks[i].competency === currentTask.competency && tasks[i].id !== currentTask.id) { alternatives.push(tasks[i]); } } if (alternatives.length) { round.splice(Math.min(position + 2, round.length), 0, alternatives[Math.floor(Math.random() * alternatives.length)]); reviewScheduled[currentTask.competency] = true; } }
+    function showHelp() { var box = document.getElementById('helpBox'); var button = document.getElementById('helpBtn'); helpLevel += 1; if (helpLevel > 3) { helpLevel = 3; } box.className = 'help-box show'; if (helpLevel === 1) { box.innerHTML = '<strong>Struktur:</strong> ' + escapeHtml(currentTask.help1); button.innerHTML = 'Hilfe 2'; } else if (helpLevel === 2) { box.innerHTML = '<strong>Denkfrage:</strong> ' + escapeHtml(currentTask.help2); button.innerHTML = 'Hilfe 3'; } else { box.innerHTML = '<strong>Erster Schritt:</strong> ' + escapeHtml(currentTask.help3); button.disabled = true; } }
+    function replaceTask() { var alternatives = []; var i; for (i = 0; i < tasks.length; i += 1) { if (tasks[i].competency === currentTask.competency && tasks[i].id !== currentTask.id) { alternatives.push(tasks[i]); } } if (alternatives.length) { round[position] = alternatives[Math.floor(Math.random() * alternatives.length)]; } showTask(); }
+    function nextTask() { position += 1; if (position >= round.length) { finishRound(); } else { showTask(); } }
+    function mergeStats() { var key; var source; var target; for (key in sessionStats) { if (sessionStats.hasOwnProperty(key)) { source = sessionStats[key]; target = getStat(savedStats, key); target.attempts += source.attempts; target.direct += source.direct; target.helped += source.helped; target.uncertain += source.uncertain; } } saveObject(STORAGE_KEY, savedStats); }
+    function finishRound() { var good = ''; var practice = ''; var key; var stat; mergeStats(); progressFill.style.width = '100%'; for (key in sessionStats) { if (sessionStats.hasOwnProperty(key)) { stat = sessionStats[key]; if (stat.direct >= 2 && stat.uncertain === 0) { good += '<div class="summary-item">' + escapeHtml(competencies[key]) + '</div>'; } else { practice += '<div class="summary-item">' + escapeHtml(competencies[key]) + '</div>'; } } } if (!good) { good = '<div class="summary-item">Du hast die Runde ruhig zu Ende gebracht.</div>'; } if (!practice) { practice = '<div class="summary-item">In dieser Runde ist keine Kompetenz offen.</div>'; } card.innerHTML = '<h1 class="final-title">Lernraupe geschafft</h1><p class="lead">Dein Lernweg wird nach Kompetenzen geordnet.</p><section class="summary-group"><h2>Das klappt schon gut</h2>' + good + '</section><section class="summary-group"><h2>Das übe ich noch</h2>' + practice + '</section><p class="saved-note">Der Lernstand bleibt nur auf diesem Gerät.</p><button class="main-btn" id="repeatBtn" type="button">Neue gemischte Runde</button><button class="help-btn" id="menuBtn" type="button">Zur Kapitel-Auswahl</button>'; document.getElementById('repeatBtn').addEventListener('click', startScreen); document.getElementById('menuBtn').addEventListener('click', function () { window.location.href = 'index.html'; }); }
+    function setReading(enabled) { document.documentElement.className = enabled ? 'reading' : ''; readBtn.setAttribute('aria-pressed', enabled ? 'true' : 'false'); readBtn.innerHTML = enabled ? 'Lesehilfe an' : 'Lesehilfe'; saveObject(READING_KEY, { enabled: enabled }); }
+    backBtn.addEventListener('click', function () { window.location.href = 'index.html'; });
+    readBtn.addEventListener('click', function () { setReading(readBtn.getAttribute('aria-pressed') !== 'true'); });
+    setReading(loadObject(READING_KEY).enabled === true);
+    startScreen();
+}());
+</script>
+</body>
+</html>
