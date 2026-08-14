@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rote Lola 4 – Wörterliste A–Z</title>
+  <style>
+    :root{--rot:#7b1d2d;--gold:#f3c85b;--papier:#fffaf0;--tinte:#29231f;--gruen:#e8f1df}
+    *{box-sizing:border-box} body{margin:0;color:var(--tinte);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#f8efe1,#eadbc6);min-height:100vh}
+    header{background:var(--rot);color:white;padding:18px max(18px,calc((100% - 1120px)/2));display:flex;align-items:center;gap:16px;box-shadow:0 3px 10px #0003}
+    .back{color:white;text-decoration:none;font-weight:800;font-size:1.05rem;border:2px solid #ffffff80;border-radius:999px;padding:8px 14px}.back:hover,.back:focus-visible{background:#fff;color:var(--rot)}
+    h1{margin:0;font-size:clamp(1.45rem,4vw,2.35rem)} header p{margin:3px 0 0;color:#ffeab0}
+    main{max-width:1120px;margin:auto;padding:22px 16px 50px}
+    .tools{position:sticky;top:0;z-index:3;background:var(--papier);padding:16px;border:2px solid #d8c49f;border-radius:18px;box-shadow:0 7px 22px #5d44231c}
+    .search-row{display:flex;gap:10px}.search-row input{flex:1;min-width:0;border:2px solid #a98b62;border-radius:12px;padding:12px 14px;font:inherit;font-size:1.08rem}.search-row button,.letter{border:0;border-radius:10px;background:var(--gold);color:#3b2912;font:inherit;font-weight:800;padding:10px 14px;cursor:pointer}.search-row button:hover,.letter:hover{filter:brightness(.95)}
+    .letters{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.letter{padding:7px 10px;min-width:38px}.letter.active{background:var(--rot);color:#fff}
+    #status{margin:12px 4px 0;font-weight:700;color:#664d35}
+    #groups{display:grid;gap:18px;margin-top:20px}.group{background:var(--papier);border:1px solid #d7c39f;border-radius:18px;padding:18px;box-shadow:0 5px 18px #5d442318}.group h2{margin:0 0 12px;color:var(--rot);font-size:1.7rem;border-bottom:3px solid var(--gold);padding-bottom:6px}
+    .words{display:flex;flex-wrap:wrap;gap:8px}.word{border:1px solid #bca780;background:white;border-radius:999px;padding:8px 12px;font:inherit;cursor:pointer}.word:hover,.word:focus-visible{background:var(--gruen);border-color:#73934f;transform:translateY(-1px)}
+    .empty{background:var(--papier);border-radius:18px;padding:30px;text-align:center;font-size:1.1rem}.hint{font-size:.9rem;color:#705e49;margin:10px 2px 0}
+    @media(max-width:600px){header{align-items:flex-start}.search-row{flex-wrap:wrap}.search-row button{width:100%}.tools{top:0}.group{padding:14px}}
+  </style>
+</head>
+<body>
+  <header><a class="back" href="index.html">← Menü</a><div><h1>Wörterliste A–Z</h1><p>Lernwörter suchen und anhören</p></div></header>
+  <main>
+    <section class="tools" aria-label="Wörterliste durchsuchen">
+      <div class="search-row"><input id="search" type="search" placeholder="Wort suchen …" autocomplete="off" aria-label="Wort suchen"><button id="clear" type="button">Suche löschen</button></div>
+      <nav class="letters" id="letters" aria-label="Anfangsbuchstaben"></nav>
+      <p id="status" aria-live="polite"></p><p class="hint">Tipp: Klicke auf ein Wort, um es vorlesen zu lassen.</p>
+    </section>
+    <div id="groups"></div>
+  </main>
+  <script>
+    const raw={
+      A:`Abend|aber|abkühlen|Abonnement|ähnlich|allein|Alphabet|anders|Anfang|anfangen|Angst|ängstlich|ärgern|Arzt|Ärztin|aufmerksam|aufräumen|aufwecken|außen`,
+      B:`Baby|backen|Bäcker|Bäckerin|Bahn|bald|bauen|Beere|beginnen|Beispiel|beißen|belohnen|beobachten|bequem|bereits|Beruf|besser|bestimmt|Bett|bevor|Bibliothek|biegen|bisschen|bleiben|Blick|blicken|blind|blinken|Blitz|blitzen|Block|bloß|bohren|Boot|boxen|Brand|brav|brennen|Brille|Brücke|Butter`,
+      C:`Chamäleon|City|Clown`,D:`dann|Decke|deutlich|deutsch|Deutschland|dick|dieser|Donner|doof|Draht|draußen|Dreck|dreckig|drehen|Druck|drücken|dumm|Dummheit|dünn|durch|Durst|durstig|Dynamo`,
+      E:`Ecke|eckig|ehrlich|eigentlich|einzeln|empfinden|entdecken|entfernen|Entfernung|entgegen|entwickeln|Entwicklung|erklären|erlauben|Erlaubnis|erleben|Erlebnis|ernähren|erschrecken|erwarten|Erwartung|erzählen|Erzählung|essen|Europa|explodieren|extra`,
+      F:`fahren|Fehler|fehlerfrei|Ferien|fernsehen|Fernseher|fertig|fett|Fett|feucht|Feuchtigkeit|Feuer|Fichte|Fleiß|fleißig|fließen|Flugzeug|Fluss|Flüssigkeit|frei|Freiheit|fressen|Frieden|friedlich|frieren|fröhlich|Fröhlichkeit|Froschlaich|früh|Fuchs|fühlen|führen`,
+      G:`Garten|ganz|Gebäude|Geburt|Geburtstag|Gefahr|gefährlich|Gefühl|gegen|geheim|Geheimnis|gehen|Gemeinde|genug|Gepäck|Geruch|Geschäft|geschehen|Geschenk|Gesetz|Gewächs|gewinnen|Gewitter|gießen|Glanz|glänzen|Glas|glatt|Glück|glücklich|glühen|Gott|greifen|Gruß|grüßen`,
+      H:`haben|Hai|Handy|hängen|hart|Haufen|häufig|heißen|heizen|Heizung|herstellen|Herstellung|hier|Hitze|Hobby|hoffen|hoffentlich|Höhe|hohl|Höhle|Hubschrauber|Hunger|hungrig|Hydrant`,
+      I:`Idee|immer|impfen|Impfung|Information|informieren|interessant|Interesse|Interview`,J:`jagen|Jahr|jemand|jetzt|Jugend|jugendlich|jung`,
+      K:`Kaffee|Käfig|Kai|Kaiser|Kamm|kämmen|kann|kennen|Kiefer|Kilogramm|klar|klären|klettern|klug|Kompass|können|Kraft|kräftig|krank|Krankenhaus|kratzen|Kreuzung|kriechen|Krieg|kühl|kühlen|Kurve|kurz|Kuss`,
+      L:`lächeln|Lachen|Land|lang|langsam|Lärm|lassen|Laub|Lehrer|Lehrerin|letzter|leuchten|Lied|liegen|Linie|links|Löffel|Luft|lustig`,
+      M:`Mädchen|Magnet|Mais|manchmal|Märchen|Maschine|Maß|Mayonnaise|Medium|Meer|mehr|messen|Messer|Miete|Minute|Mittag|mittags|Mitte|mixen|Moos|Morgen|morgens|Müll|Museum|müssen|mutig|Mütze`,
+      N:`nächster|nachts|nah|Nähe|nähen|Nahrung|nass|Nässe|Natur|natürlich|nehmen|nichts|niemals|niemand|noch|Nummer|nun|nur|Nuss|nutzen|nützlich`,O:`ob|oben|oder|offen|oft|ohne|Ort`,
+      P:`Paar|paar|Päckchen|packen|Paket|Party|Pass|passen|Pfanne|Pferd|Pilz|plötzlich|prima|Programm|putzen|Puzzle|Pyjama|Pyramide`,Q:`Quadrat|Qual|quälen|Qualm|Quartett|Quatsch|Quelle|quer`,
+      R:`Radio|raten|Rätsel|Raum|rechts|Reh|Reihe|reisen|reißen|rennen|Reparatur|reparieren|Rettungsdienst|richtig|riechen|Riese|Ruhe|ruhig|rühren|rund`,
+      S:`sammeln|Sammlung|schaffen|Schall|schalten|Schalter|scharf|Schärfe|Schatten|schieben|schief|schimpfen|schließen|Schlüssel|schmecken|Schmutz|schmutzig|schneiden|schon|Schreck|schrecklich|schütteln|Schutz|schützen|schweigen|schwierig|Schwierigkeit|schwimmen|schwitzen|See|sehr|selbst|setzen|sitzen|Skateboard|Skizze|skizzieren|sparen|Spaß|spät|Spaziergang|Spiegel|spiegeln|spitz|Spitze|Stadt|Stamm|stark|stärken|Start|Startbahn|Steuer|steuern|Stiel|Stift|Stille|stimmen|Stoff|stoßen|Strand|Straße|Strauß|Streit|streiten|Strom|strömen|Stück|Stuhl|Sturm|stürmisch|süß|Süßigkeit`,
+      T:`Tag|Taifun|Tanne|tanzen|Tasse|tausend|Taxi|Technik|Teddy|Teller|Temperatur|Text|Theater|Thermometer|tief|Tiefe|Tiger|trainieren|Träne|Traum|träumen|traurig|treffen|treu|trocken|trotzdem`,
+      U:`über|überall|überqueren|Uhr|umkehren|umrühren|Unfall|Unfallort|ungefähr|unter|Unterricht|Urlaub`,
+      V:`Vase|Verb|verbieten|verbrauchen|verbrennen|Verbrennung|Verein|vereinen|vergessen|Verkehr|Verkehrsunfall|verletzen|Verletzte|Verletzung|verlieren|verpacken|Verpackung|verschmutzen|Verschmutzung|verstecken|verstehen|verwechseln|vielleicht|voll|vollständig|vorbei|Vorfahrt|vorgestern|Vormittag|Vorsicht|vorsichtig|vorwärts`,
+      W:`wachsen|Wahl|wählen|während|Wald|Wand|Wasser|wechseln|wecken|Wecker|Weihnachten|welche|Welt|wenn|werden|wichtig|wie|wieder|wiegen|wild|Wind|winken|wissen|wohnen`,X:`Xylophon`,Y:`Yak|Yeti|Yoga`,Z:`Zahl|zählen|Zeh|zeichnen|Zeit|Zeitung|Zeugnis|ziehen|Ziel|zielen|zufrieden|Zukunft|zukünftig|zuletzt|zurück|Zylinder`
+    };
+    const data=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,v.split('|')]));
+    const search=document.getElementById('search'),groups=document.getElementById('groups'),status=document.getElementById('status'),letters=document.getElementById('letters');
+    let chosen=''; const norm=s=>s.toLocaleLowerCase('de-DE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ß/g,'ss');
+    function speak(word){if(!('speechSynthesis' in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang='de-DE';u.rate=.82;speechSynthesis.speak(u)}
+    function render(){const q=norm(search.value.trim());groups.textContent='';let count=0;for(const [letter,words] of Object.entries(data)){if(chosen&&letter!==chosen)continue;const found=words.filter(w=>!q||norm(w).includes(q));if(!found.length)continue;count+=found.length;const section=document.createElement('section');section.className='group';section.id='letter-'+letter;const h=document.createElement('h2');h.textContent=letter;const box=document.createElement('div');box.className='words';found.forEach(w=>{const b=document.createElement('button');b.className='word';b.type='button';b.textContent=w;b.title=w+' vorlesen';b.addEventListener('click',()=>speak(w));box.append(b)});section.append(h,box);groups.append(section)}status.textContent=count+' '+(count===1?'Wort':'Wörter')+' gefunden';if(!count){const e=document.createElement('p');e.className='empty';e.textContent='Kein Wort gefunden. Probiere eine andere Schreibweise.';groups.append(e)}}
+    Object.keys(data).forEach(letter=>{const b=document.createElement('button');b.className='letter';b.type='button';b.textContent=letter;b.addEventListener('click',()=>{chosen=chosen===letter?'':letter;document.querySelectorAll('.letter').forEach(x=>x.classList.toggle('active',x.textContent===chosen));render()});letters.append(b)});
+    search.addEventListener('input',render);document.getElementById('clear').addEventListener('click',()=>{search.value='';chosen='';document.querySelectorAll('.letter').forEach(x=>x.classList.remove('active'));render();search.focus()});render();
+  </script>
+</body>
+</html>
