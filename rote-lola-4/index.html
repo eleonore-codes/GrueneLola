@@ -43,7 +43,7 @@
                     <button class="tile active" id="chapter5Btn" type="button"><span class="number">5</span><span class="tile-text"><span class="tile-title">Groß- und Kleinschreibung</span><span class="tile-sub">Zeitangaben, substantivierte Verben und Eigennamen</span></span><span class="badge">Start</span></button>
                     <button class="tile active" id="chapter6Btn" type="button"><span class="number">6</span><span class="tile-text"><span class="tile-title">Kurze und lange Selbstlaute</span><span class="tile-sub">Selbstlautlänge, doppelte Mitlaute, tz/z und ck/k</span></span><span class="badge">Start</span></button>
                     <button class="tile active" id="chapter7Btn" type="button"><span class="number">7</span><span class="tile-text"><span class="tile-title">s-Laute</span><span class="tile-sub">s/ß, Wortformen, Fugen-s und das/dass</span></span><span class="badge">Start</span></button>
-                    <button class="tile locked" type="button" disabled><span class="number">8</span><span class="tile-text"><span class="tile-title">Rechtschreibstrategien anwenden</span><span class="tile-sub">Seiten 59–66</span></span><span class="badge">Später</span></button>
+                    <button class="tile active" id="chapter8Btn" type="button"><span class="number">8</span><span class="tile-text"><span class="tile-title">Rechtschreibstrategien anwenden</span><span class="tile-sub">Silben, Ableiten, Verlängern und Merkwörter verbinden</span></span><span class="badge">Start</span></button>
                 </div>
             </section>
             <a class="back" href="../index.html">Zur Klassen-Auswahl</a>
@@ -58,6 +58,7 @@
         var chapter5Btn = document.getElementById('chapter5Btn');
         var chapter6Btn = document.getElementById('chapter6Btn');
         var chapter7Btn = document.getElementById('chapter7Btn');
+        var chapter8Btn = document.getElementById('chapter8Btn');
         chapter1Btn.addEventListener('click', function () { window.location.href = 'kapitel-1.html'; });
         chapter2Btn.addEventListener('click', function () { window.location.href = 'kapitel-2.html'; });
         chapter3Btn.addEventListener('click', function () { window.location.href = 'kapitel-3.html'; });
@@ -65,6 +66,7 @@
         chapter5Btn.addEventListener('click', function () { window.location.href = 'kapitel-5.html'; });
         chapter6Btn.addEventListener('click', function () { window.location.href = 'kapitel-6.html'; });
         chapter7Btn.addEventListener('click', function () { window.location.href = 'kapitel-7.html'; });
+        chapter8Btn.addEventListener('click', function () { window.location.href = 'kapitel-8.html'; });
     }());
     </script>
 </body>
