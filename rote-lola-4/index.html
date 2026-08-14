@@ -39,7 +39,7 @@
                     <button class="tile active" id="chapter1Btn" type="button"><span class="number">1</span><span class="tile-text"><span class="tile-title">Im Wörterbuch nachschlagen</span><span class="tile-sub">Alphabet, Nomen, Verben und Fremdwörter</span></span><span class="badge">Start</span></button>
                     <button class="tile active" id="chapter2Btn" type="button"><span class="number">2</span><span class="tile-text"><span class="tile-title">Mit Silben arbeiten</span><span class="tile-sub">Silbenkerne erkennen und Wörter sicher trennen</span></span><span class="badge">Start</span></button>
                     <button class="tile active" id="chapter3Btn" type="button"><span class="number">3</span><span class="tile-text"><span class="tile-title">Merkwörter</span><span class="tile-sub">ai, Dehnungs-h, kleine Wörter und Y/y</span></span><span class="badge">Start</span></button>
-                    <button class="tile locked" type="button" disabled><span class="number">4</span><span class="tile-text"><span class="tile-title">Ableiten und verlängern</span><span class="tile-sub">Seiten 27–37</span></span><span class="badge">Später</span></button>
+                    <button class="tile active" id="chapter4Btn" type="button"><span class="number">4</span><span class="tile-text"><span class="tile-title">Ableiten und verlängern</span><span class="tile-sub">ä/äu ableiten, Wortenden und silbentrennendes h</span></span><span class="badge">Start</span></button>
                     <button class="tile locked" type="button" disabled><span class="number">5</span><span class="tile-text"><span class="tile-title">Groß- und Kleinschreibung</span><span class="tile-sub">Seiten 38–44</span></span><span class="badge">Später</span></button>
                     <button class="tile locked" type="button" disabled><span class="number">6</span><span class="tile-text"><span class="tile-title">Kurze und lange Selbstlaute</span><span class="tile-sub">Seiten 45–52</span></span><span class="badge">Später</span></button>
                     <button class="tile locked" type="button" disabled><span class="number">7</span><span class="tile-text"><span class="tile-title">s-Laute</span><span class="tile-sub">Seiten 53–58</span></span><span class="badge">Später</span></button>
@@ -54,9 +54,11 @@
         var chapter1Btn = document.getElementById('chapter1Btn');
         var chapter2Btn = document.getElementById('chapter2Btn');
         var chapter3Btn = document.getElementById('chapter3Btn');
+        var chapter4Btn = document.getElementById('chapter4Btn');
         chapter1Btn.addEventListener('click', function () { window.location.href = 'kapitel-1.html'; });
         chapter2Btn.addEventListener('click', function () { window.location.href = 'kapitel-2.html'; });
         chapter3Btn.addEventListener('click', function () { window.location.href = 'kapitel-3.html'; });
+        chapter4Btn.addEventListener('click', function () { window.location.href = 'kapitel-4.html'; });
     }());
     </script>
 </body>
