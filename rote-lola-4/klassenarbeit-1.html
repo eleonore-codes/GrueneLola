@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rote Lola 4 · Klassenarbeit 1</title>
+  <link rel="stylesheet" href="klassenarbeit.css">
+  <link rel="stylesheet" href="klassenarbeit-extra.css">
+</head>
+<body>
+<div class="page">
+  <a class="back-link" href="index.html">← Zur Übersicht</a>
+  <header class="hero">
+    <div class="eyebrow">Rote Lola 4 · Vorbereitung</div>
+    <h1 id="testTitle">Klassenarbeit 1</h1>
+    <p class="subtitle" id="testSubtitle"></p>
+    <div class="facts"><span class="fact">Kapitel 1–3</span><span class="fact">40 Punkte</span><span class="fact">ca. 45 Minuten</span></div>
+    <div class="student-meta"><span>Name: ______________________________</span><span>Datum: ______________</span></div>
+  </header>
+  <main class="test-shell">
+    <div class="mode" aria-label="Arbeitsmodus">
+      <button class="button active" data-mode="practice" type="button">Üben mit Rückmeldung</button>
+      <button class="button secondary" data-mode="exam" type="button">Probe-Klassenarbeit</button>
+      <button class="button secondary" id="printBlank" type="button">Schülerbogen drucken</button>
+    </div>
+    <p class="mode-note" id="modeNote"></p>
+    <div class="progress"><div id="progressBar"></div></div>
+    <p class="progress-text" id="progressText"></p>
+    <section id="questions"></section>
+    <div class="footer-actions">
+      <button class="button" id="submitTest" type="button">Arbeit abgeben und auswerten</button>
+      <button class="button secondary" id="printSolutions" type="button">Lösungsblatt drucken</button>
+    </div>
+    <section class="result hidden" id="result"></section>
+    <aside class="teacher-note"><h2>Bewertungsvorschlag</h2><p>36–40 Punkte: sehr sicher · 30–35 Punkte: sicher · 22–29 Punkte: auf gutem Weg · 0–21 Punkte: gezielt weiterüben. Die Rückmeldung ist bewusst kompetenzorientiert und keine verbindliche Schulnote.</p></aside>
+  </main>
+</div>
+<script>
+window.ROTE_LOLA_TEST={
+ title:'Klassenarbeit 1',
+ subtitle:'Wörterbuch · Silben · Merkwörter',
+ questions:[
+  {title:'Alphabet-Reihe',prompt:'Ordne die vier Wörter alphabetisch. Schreibe die vollständige Reihe mit Kommas.',competency:'Im Wörterbuch orientieren',parts:[{label:'Bär · Birne · Ball · Buch',answers:['Ball, Bär, Birne, Buch','Ball, Bär, Birne, Buch.']}]},
+  {title:'Nachschlagform finden',prompt:'Schreibe zu jeder Wortform die Form, unter der du sie im Wörterbuch suchst.',competency:'Nachschlagformen bilden',parts:[{label:'die Häuser',answers:['Haus','das Haus']},{label:'sie lief',answers:['laufen']},{label:'die Ärztinnen',answers:['Ärztin','die Ärztin']},{label:'er gewann',answers:['gewinnen']}]},
+  {title:'Wörterbuchwissen',prompt:'Ergänze die Angaben so, wie sie im Wörterbuch stehen könnten.',competency:'Wörterbuchangaben nutzen',parts:[{label:'Mehrzahl von der Garten',answers:['die Gärten','Gärten']},{label:'Artikel zu Bibliothek',answers:['die']},{label:'Grundform von er biss',answers:['beißen']},{label:'Mehrzahl von das Erlebnis',answers:['die Erlebnisse','Erlebnisse']}]},
+  {title:'Silben sicher trennen',prompt:'Trenne jedes Wort mit Bindestrichen an allen erlaubten Stellen.',competency:'Wörter in Silben gliedern',parts:[{label:'Bibliothek',answers:['Bi-bli-o-thek']},{label:'Abonnement',answers:['Abon-ne-ment']},{label:'interessant',answers:['in-te-res-sant']},{label:'Pyramide',answers:['Py-ra-mi-de']}]},
+  {title:'Silbenkerne erkennen',prompt:'Schreibe nur die Selbstlaute oder Zwielaute der Silbenkerne in der richtigen Reihenfolge, getrennt durch Kommas.',competency:'Silbenkerne erkennen',parts:[{label:'Feuchtigkeit',answers:['eu, i, ei','eu,i,ei']},{label:'Europa',answers:['Eu, o, a','eu, o, a','eu,o,a']},{label:'Gebäude',answers:['e, äu, e','e,äu,e']},{label:'Zeitung',answers:['ei, u','ei,u']}]},
+  {title:'Trennregeln anwenden',prompt:'Schreibe die Wörter richtig getrennt.',competency:'Trennregeln anwenden',parts:[{label:'Zucker',answers:['Zu-cker']},{label:'Katze',answers:['Kat-ze']},{label:'Knospe',answers:['Knos-pe']},{label:'Bäckerei',answers:['Bä-cke-rei']}]},
+  {title:'Merkwörter mit ai',prompt:'Ergänze jedes Wort vollständig.',competency:'ai-Merkwörter schreiben',parts:[{label:'K__ser',answers:['Kaiser']},{label:'M__s',answers:['Mais']},{label:'H__',answers:['Hai']},{label:'T__fun',answers:['Taifun']}]},
+  {title:'Dehnungs-h',prompt:'Schreibe die Wörter richtig auf. Entscheide, ob ein h gebraucht wird.',competency:'Dehnungs-h beachten',parts:[{label:'Zan / Zahn',answers:['Zahn']},{label:'Verker / Verkehr',answers:['Verkehr']},{label:'fröhlich / frölich',answers:['fröhlich']},{label:'nemen / nehmen',answers:['nehmen']}]},
+  {title:'Kleine Merkwörter',prompt:'Ergänze die Sätze mit dem passenden kleinen Wort.',competency:'Kleine Merkwörter schreiben',parts:[{label:'Ich bleibe ___ Hause.',answers:['zu']},{label:'___ du heute Zeit?',answers:['Hast']},{label:'Wir gehen ___ den Wald.',answers:['in']},{label:'Das Geschenk ist ___ dich.',answers:['für']}]},
+  {title:'Wörter mit Y/y',prompt:'Schreibe die fehlende Form richtig.',competency:'Y/y-Merkwörter schreiben',parts:[{label:'ein Hobby – viele …',answers:['Hobbys']},{label:'ein Baby – viele …',answers:['Babys']},{label:'ein Handy – viele …',answers:['Handys']},{label:'ein Interview – viele …',answers:['Interviews']}]}
+ ]
+};
+</script>
+<script src="klassenarbeit.js"></script>
+</body>
+</html>

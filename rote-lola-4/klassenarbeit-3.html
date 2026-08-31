@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rote Lola 4 · Klassenarbeit 3</title>
+  <link rel="stylesheet" href="klassenarbeit.css">
+  <link rel="stylesheet" href="klassenarbeit-extra.css">
+</head>
+<body>
+<div class="page">
+  <a class="back-link" href="index.html">← Zur Übersicht</a>
+  <header class="hero">
+    <div class="eyebrow">Rote Lola 4 · Vorbereitung</div>
+    <h1 id="testTitle">Klassenarbeit 3</h1>
+    <p class="subtitle" id="testSubtitle"></p>
+    <div class="facts"><span class="fact">Kapitel 7–8 + Wiederholung</span><span class="fact">40 Punkte</span><span class="fact">ca. 45 Minuten</span></div>
+    <div class="student-meta"><span>Name: ______________________________</span><span>Datum: ______________</span></div>
+  </header>
+  <main class="test-shell">
+    <div class="mode" aria-label="Arbeitsmodus">
+      <button class="button active" data-mode="practice" type="button">Üben mit Rückmeldung</button>
+      <button class="button secondary" data-mode="exam" type="button">Probe-Klassenarbeit</button>
+      <button class="button secondary" id="printBlank" type="button">Schülerbogen drucken</button>
+    </div>
+    <p class="mode-note" id="modeNote"></p>
+    <div class="progress"><div id="progressBar"></div></div>
+    <p class="progress-text" id="progressText"></p>
+    <section id="questions"></section>
+    <div class="footer-actions">
+      <button class="button" id="submitTest" type="button">Arbeit abgeben und auswerten</button>
+      <button class="button secondary" id="printSolutions" type="button">Lösungsblatt drucken</button>
+    </div>
+    <section class="result hidden" id="result"></section>
+    <aside class="teacher-note"><h2>Bewertungsvorschlag</h2><p>36–40 Punkte: sehr sicher · 30–35 Punkte: sicher · 22–29 Punkte: auf gutem Weg · 0–21 Punkte: gezielt weiterüben. Die Rückmeldung ist bewusst kompetenzorientiert und keine verbindliche Schulnote.</p></aside>
+  </main>
+</div>
+<script>
+window.ROTE_LOLA_TEST={
+ title:'Klassenarbeit 3',
+ subtitle:'s-Laute · das/dass · Strategien anwenden · Wiederholung',
+ questions:[
+  {title:'s oder ß',prompt:'Schreibe jedes Wort vollständig und richtig.',competency:'s und ß unterscheiden',parts:[{label:'Ho_e',answers:['Hose']},{label:'flei_ig',answers:['fleißig']},{label:'Grü_e',answers:['Grüße']},{label:'Kai_er',answers:['Kaiser']}]},
+  {title:'Wörter mit ß zuordnen',prompt:'Schreibe die verlangte Form richtig.',competency:'ß in Wortformen erhalten',parts:[{label:'Nomen zu grüßen',answers:['Gruß','der Gruß']},{label:'Grundform zu er stieß',answers:['stoßen']},{label:'Vergangenheit zu fließen',answers:['floss','es floss']},{label:'Zukunft zu süßen',answers:['wird süßen','er wird süßen','sie wird süßen']}]},
+  {title:'Zusammengesetzte Nomen mit Fugen-s',prompt:'Verbinde die beiden Wörter. Schreibe das zusammengesetzte Nomen mit Artikel.',competency:'Fugen-s verwenden',parts:[{label:'Geburt + Tag',answers:['der Geburtstag']},{label:'Glück + Strähne',answers:['die Glückssträhne']},{label:'Unterricht + Stunde',answers:['die Unterrichtsstunde']},{label:'Schaden + Ersatz',answers:['der Schadensersatz']}]},
+  {title:'das oder dass',prompt:'Setze das oder dass ein.',competency:'das und dass unterscheiden',parts:[{label:'Das Haus, ___ dort steht, ist alt.',answers:['das']},{label:'Ich weiß, ___ du kommst.',answers:['dass']},{label:'Mia hofft, ___ es nicht regnet.',answers:['dass']},{label:'Das Buch, ___ ich lese, ist spannend.',answers:['das']}]},
+  {title:'Strategie auswählen',prompt:'Schreibe die passende Strategie: Silben, Ableiten, Verlängern oder Merken.',competency:'Rechtschreibstrategien auswählen',parts:[{label:'Häuser – Haus',answers:['Ableiten']},{label:'Wald – Wälder',answers:['Verlängern']},{label:'lo-ben',answers:['Silben']},{label:'Kaiser',answers:['Merken']}]},
+  {title:'Fehler mit Strategien verbessern',prompt:'Schreibe nur das fehlerhafte Wort richtig auf.',competency:'Strategien selbstständig anwenden',parts:[{label:'Im Walt stehen hohe Bäume.',answers:['Wald']},{label:'Der Förster nimt sich Zeit.',answers:['nimmt']},{label:'Ein Eichhörnchen sitzt auf dem Astt.',answers:['Ast']},{label:'Wir sehen einen Fuks.',answers:['Fuchs']}]},
+  {title:'Gemischte Merkstellen',prompt:'Schreibe jedes Wort richtig auf.',competency:'Merkstellen sicher schreiben',parts:[{label:'w__der (langes i)',answers:['wieder']},{label:'v__lleicht (langes i)',answers:['vielleicht']},{label:'M__s (ai-Wort)',answers:['Mais']},{label:'Verke__ (Dehnungs-h)',answers:['Verkehr']}]},
+  {title:'Groß- und Kleinschreibung',prompt:'Schreibe nur das markierte Wort richtig.',competency:'Groß- und Kleinschreibung anwenden',parts:[{label:'Beim ESSEN reden wir leise.',answers:['Essen']},{label:'Wir treffen uns MORGEN.',answers:['morgen']},{label:'Der PAZIFISCHE Ozean ist riesig.',answers:['Pazifische']},{label:'JEDEN ABEND lese ich.',answers:['jeden Abend']}]},
+  {title:'Doppelte Mitlaute, tz und ck',prompt:'Schreibe jedes Wort richtig auf.',competency:'Selbstlautlänge für die Schreibung nutzen',parts:[{label:'schwi_en (m/mm)',answers:['schwimmen']},{label:'Ka_e (z/tz)',answers:['Katze']},{label:'E_e (k/ck)',answers:['Ecke']},{label:'ho_en (f/ff)',answers:['hoffen']}]},
+  {title:'Abschlusskorrektur',prompt:'In jedem Satz ist genau ein Wort falsch. Schreibe das verbesserte Wort auf.',competency:'Texte kontrollieren und verbessern',parts:[{label:'Heute scheind die Sonne.',answers:['scheint']},{label:'Ich hoffe, das wir draußen spielen.',answers:['dass']},{label:'Der Geburstag war schön.',answers:['Geburtstag']},{label:'Beim Schwimen hatte ich Spaß.',answers:['Schwimmen']}]}
+ ]
+};
+</script>
+<script src="klassenarbeit.js"></script>
+</body>
+</html>

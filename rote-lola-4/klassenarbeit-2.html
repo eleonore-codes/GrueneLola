@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rote Lola 4 · Klassenarbeit 2</title>
+  <link rel="stylesheet" href="klassenarbeit.css">
+  <link rel="stylesheet" href="klassenarbeit-extra.css">
+</head>
+<body>
+<div class="page">
+  <a class="back-link" href="index.html">← Zur Übersicht</a>
+  <header class="hero">
+    <div class="eyebrow">Rote Lola 4 · Vorbereitung</div>
+    <h1 id="testTitle">Klassenarbeit 2</h1>
+    <p class="subtitle" id="testSubtitle"></p>
+    <div class="facts"><span class="fact">Kapitel 4–6</span><span class="fact">40 Punkte</span><span class="fact">ca. 45 Minuten</span></div>
+    <div class="student-meta"><span>Name: ______________________________</span><span>Datum: ______________</span></div>
+  </header>
+  <main class="test-shell">
+    <div class="mode" aria-label="Arbeitsmodus">
+      <button class="button active" data-mode="practice" type="button">Üben mit Rückmeldung</button>
+      <button class="button secondary" data-mode="exam" type="button">Probe-Klassenarbeit</button>
+      <button class="button secondary" id="printBlank" type="button">Schülerbogen drucken</button>
+    </div>
+    <p class="mode-note" id="modeNote"></p>
+    <div class="progress"><div id="progressBar"></div></div>
+    <p class="progress-text" id="progressText"></p>
+    <section id="questions"></section>
+    <div class="footer-actions">
+      <button class="button" id="submitTest" type="button">Arbeit abgeben und auswerten</button>
+      <button class="button secondary" id="printSolutions" type="button">Lösungsblatt drucken</button>
+    </div>
+    <section class="result hidden" id="result"></section>
+    <aside class="teacher-note"><h2>Bewertungsvorschlag</h2><p>36–40 Punkte: sehr sicher · 30–35 Punkte: sicher · 22–29 Punkte: auf gutem Weg · 0–21 Punkte: gezielt weiterüben. Die Rückmeldung ist bewusst kompetenzorientiert und keine verbindliche Schulnote.</p></aside>
+  </main>
+</div>
+<script>
+window.ROTE_LOLA_TEST={
+ title:'Klassenarbeit 2',
+ subtitle:'Ableiten · Verlängern · Großschreibung · Selbstlautlänge',
+ questions:[
+  {title:'Mit Wortfamilien ableiten',prompt:'Schreibe das passende Wort mit ä oder äu.',competency:'ä/e und äu/eu ableiten',parts:[{label:'der Baum – die …',answers:['Bäume','die Bäume']},{label:'der Raum – die …',answers:['Räume','die Räume']},{label:'lang – die …',answers:['Länge','die Länge']},{label:'kalt – die …',answers:['Kälte','die Kälte']}]},
+  {title:'Wortenden verlängern',prompt:'Verlängere das Wort und schreibe danach den richtigen Endbuchstaben.',competency:'Wortenden verlängern',parts:[{label:'der Wal_ – die Wälder',answers:['Wald','der Wald']},{label:'der Ber_ – die Berge',answers:['Berg','der Berg']},{label:'der Sie_ – die Siege',answers:['Sieg','der Sieg']},{label:'der Die_ – die Diebe',answers:['Dieb','der Dieb']}]},
+  {title:'Silbentrennendes h',prompt:'Ergänze jedes Wort vollständig.',competency:'Silbentrennendes h schreiben',parts:[{label:'se_en',answers:['sehen']},{label:'Ru_e',answers:['Ruhe']},{label:'dre_en',answers:['drehen']},{label:'blü_en',answers:['blühen']}]},
+  {title:'Zeitangaben schreiben',prompt:'Schreibe die markierte Zeitangabe richtig.',competency:'Zeitangaben groß- und kleinschreiben',parts:[{label:'Wir treffen uns am MONTAG.',answers:['Montag']},{label:'Ich übe MORGENS.',answers:['morgens']},{label:'HEUTE scheint die Sonne.',answers:['Heute']},{label:'JEDEN ABEND lese ich.',answers:['jeden Abend']}]},
+  {title:'Verben als Nomen',prompt:'Schreibe die nominalisierten Verben richtig.',competency:'Nominalisierte Verben großschreiben',parts:[{label:'Beim ESSEN reden wir leise.',answers:['Essen']},{label:'Das SCHWIMMEN macht Spaß.',answers:['Schwimmen']},{label:'Zum LESEN brauche ich Ruhe.',answers:['Lesen']},{label:'Beim KLETTERN schwitzt Max.',answers:['Klettern']}]},
+  {title:'Mehrteilige Eigennamen',prompt:'Schreibe den Eigennamen vollständig und richtig.',competency:'Mehrteilige Eigennamen schreiben',parts:[{label:'der nahe Osten',answers:['der Nahe Osten','Nahe Osten']},{label:'der pazifische Ozean',answers:['der Pazifische Ozean','Pazifische Ozean']},{label:'das weiße Haus',answers:['das Weiße Haus','Weiße Haus']},{label:'die vereinigten Staaten',answers:['die Vereinigten Staaten','Vereinigte Staaten']}]},
+  {title:'Kurze Selbstlaute erkennen',prompt:'Schreibe nur die Wörter mit kurz gesprochenem betontem Selbstlaut.',competency:'Kurze und lange Selbstlaute unterscheiden',parts:[{label:'Gras / Ast',answers:['Ast']},{label:'Mehl / Ecke',answers:['Ecke']},{label:'Liebe / Kiste',answers:['Kiste']},{label:'Moos / offen',answers:['offen']}]},
+  {title:'Doppelte Mitlaute',prompt:'Ergänze den fehlenden einfachen oder doppelten Mitlaut.',competency:'Doppelte Mitlaute schreiben',parts:[{label:'schli_ (m/mm)',answers:['schlimm']},{label:'Su_e (p/pp)',answers:['Suppe']},{label:'Te_er (l/ll)',answers:['Teller']},{label:'ho_en (f/ff)',answers:['hoffen']}]},
+  {title:'tz oder z',prompt:'Schreibe jedes Wort richtig auf.',competency:'tz und z unterscheiden',parts:[{label:'Ka_e',answers:['Katze']},{label:'Hei_ung',answers:['Heizung']},{label:'schmu_ig',answers:['schmutzig']},{label:'Pil_',answers:['Pilz']}]},
+  {title:'ck oder k',prompt:'Schreibe jedes Wort richtig auf.',competency:'ck und k unterscheiden',parts:[{label:'E_e',answers:['Ecke']},{label:'Pau_e',answers:['Pauke']},{label:'par_en',answers:['parken']},{label:'zurü_',answers:['zurück']}]}
+ ]
+};
+</script>
+<script src="klassenarbeit.js"></script>
+</body>
+</html>
